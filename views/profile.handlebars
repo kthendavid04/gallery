@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, {{name}}!</h2>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Create a New Auction:</h3>
+
+     <form class="form new-post-form">
+      <div class="form-group">
+        <label for="painting-title">Painting Title:</label>
+        <input class="form-input" type="text" id="painting-id" name="painting-title" />
+      </div>
+      <div class="form-group">
+        <label for="painting-price">needed funding ($):</label>
+        <input class="form-input" type="number" id="painting-price" name="painting-price" />
+      </div>
+      <div class="form-group">
+        <label for="painting-desc">description:</label>
+        <textarea class="form-input" id="painting-desc" name="painting-desc"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+
+  {{#if paintings.length}}
+  <div class="col-md-6 paintings-list">
+    <h3>Current Paintings:</h3>
+
+    {{#each paintings as |painting|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/post/{{painting.id}}">{{painting.title}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{painting.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="./js/profile.js"></script>
