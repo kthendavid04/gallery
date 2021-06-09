@@ -28,7 +28,8 @@ UserType.init(
         sequelize,
         timestamps: true,
         freezeTableName: true,
-        underscored: true
+        underscored: true,
+        modelName: "User_Type"
     }
 );
 
