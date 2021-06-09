@@ -1,0 +1,1 @@
+const UserType = require("./UserType");
