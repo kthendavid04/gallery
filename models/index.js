@@ -66,3 +66,14 @@ Tag.belongsToMany(Painting, {
         unique:false
     }
 });
+
+module.exports = {
+    UserType,
+    User,
+    Painting,
+    PaintingProc,
+    Category,
+    PaintingCat,
+    Tag,
+    PaintingTag
+};
