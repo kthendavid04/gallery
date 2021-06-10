@@ -38,11 +38,33 @@ router.get("/", async (req, res) => {
     // and displays all users list
     res.status(200).json(allUsers);
     
-  } catch (error) {
+  } catch {
 
     // Returns with status code 500
     // and displays error
-    res.status(500).json(error);    
+    res.status(500).json("Please check your input data");
+  }
+});
+
+router.post("/", async (req, res) => {
+
+  try {
+
+    // Variable to create user based on the post request body
+    const newUserData = await User.create(req.body);
+
+    req.session.save(() => {
+      req.session.userId = newUserData.id;
+      req.session.loggedIn = true;
+      
+      res.status(200).json(newUserData);
+    });
+    
+  } catch {
+    
+    // Returns with status code 500
+    // and displays error
+    res.status(500).json("Please check your input data");
   }
 });
 
