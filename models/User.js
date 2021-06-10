@@ -69,7 +69,7 @@ User.init(
             },
         },
         bank_info: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: true,

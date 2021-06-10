@@ -1,0 +1,27 @@
+[
+  {
+    "first_name": "John",
+    "last_name" : "Smith",
+    "email": "John.Smith@email.com",
+    "password": "password12345",
+    "address" : "123 abc str",
+    "bank_info" : "1234567890"
+  },
+  {
+    "first_name": "Jose",
+    "last_name" : "Vargas",
+    "email": "John.Vargas@email.com",
+    "password": "password12345",
+    "address" : "123 abc str",
+    "bank_info" : "0123456789"
+  },
+  {
+    "first_name": "Ezio",
+    "last_name" : "Auditore",
+    "email": "Ezio.Auditore@email.com",
+    "password": "password12345",
+    "address" : "123 abc str",
+    "bank_info" : "7891234560"
+  }
+]
+  
