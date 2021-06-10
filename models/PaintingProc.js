@@ -1,6 +1,8 @@
 // Local variables to call on packages
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Painting = require('./Painting');
+const User = require('./User');
 
 class PaintingProc extends Model {}
 
@@ -14,15 +16,30 @@ PaintingProc.init(
         },
         seller_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: User,
+                key: "id",
+                unique: false
+            }
         },
         buyer_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: User,
+                key: "id",
+                unique: false
+            }
         },
         painting_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: Painting,
+                key: "id",
+                unique: false
+            }
         },
         start_date: {
             type: DataTypes.DATEONLY,
