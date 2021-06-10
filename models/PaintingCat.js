@@ -35,7 +35,8 @@ PaintingCategory.init(
         sequelize,
         timestamps: true,
         freezeTableName: true,
-        underscored: true
+        underscored: true,
+        modelName: "painting_category"
     }
 );
 
