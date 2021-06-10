@@ -1,11 +1,11 @@
 // Local variables to call on packages
 const express = require("express");
-const session = require('express-session');
+const session = require("express-session");
 const sequelize = require("./config/connection");
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const routes = require('./controllers');
-const exphbs = require('express-handlebars');
-const helpers = require('./utils/helpers');
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const routes = require("./controllers");
+const exphbs = require("express-handlebars");
+const helpers = require("./utils/helpers");
 
 // Local declare variables
 const app = express();
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001;
 const hbs = exphbs.create({ helpers });
 
 const sess = {
-    secret: 'Super secret secret',
+    secret: "Super secret secret",
     cookie: {},
     resave: false,
     saveUninitialized: true,
@@ -28,8 +28,8 @@ const sess = {
 app.use(session(sess));
 
 // Inform Express.js on which template engine to use
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
 // Require for POST method
 app.use(express.json());
@@ -42,5 +42,5 @@ app.use(express.static("public"));
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log('Now listening on http://localhost:' + PORT));
+    app.listen(PORT, () => console.log("Now listening on http://localhost:" + PORT));
 });
