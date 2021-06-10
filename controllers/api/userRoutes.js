@@ -6,6 +6,9 @@ const User = require("../../models/User");
 router.get("/", async (req, res) => {
   
   try {
+
+    let usersList = [];
+    let singleObj = {};
     
     // Query for all users and saves to variable with raw: true, and excluding password field
     const allUsers = await User.findAll({
@@ -15,11 +18,21 @@ router.get("/", async (req, res) => {
       raw: true
     });
 
-    // Loops thru the allUsers variable, adds [type] parameter
-    // and queries the UserType table for the type name to add to each object
-    for (const user of allUsers) {
-      user.type = (await UserType.findByPk(user.type_id)).type;
-    }
+    // Loops thru the allUsers variable, and copies to a new array
+    // with the UserType name of the user
+    // for (const user of allUsers) {
+    //   singleObj.id = user.id;
+    //   singleObj.first_name = user.first_name;
+    //   singleObj.last_name = user.last_name;
+    //   singleObj.email = user.email;
+    //   singleObj.address = user.address;
+    //   singleObj.bank_info = user.bank_info;
+    //   singleObj.type_id = user.type_id;
+    //   singleObj.type = (await UserType.findByPk(user.type_id)).type;
+    //   singleObj.createdAt = user.createdAt;
+    //   singleObj.updatedAt = user.updatedAt;
+    //   usersList.push(singleObj);
+    // }
 
     // Returns with status code 200
     // and displays all users list
