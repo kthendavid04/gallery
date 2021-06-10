@@ -1,60 +1,35 @@
 const router = require('express').Router();
-const  User = require("../../models/User");
+const { UserType } = require('../../models');
+const User = require("../../models/User");
 
-router.post('/', async (req, res) => {
+// GET route for all users
+router.get("/", async (req, res) => {
+  
   try {
-    const userData = await User.create(req.body);
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-
-      res.status(200).json(userData);
+    
+    // Query for all users and saves to variable with raw: true, and excluding password field
+    const allUsers = await User.findAll({
+      attributes: {
+        exclude: ['password']
+      },
+      raw: true
     });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
 
-router.post('/login', async (req, res) => {
-  try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
-
-    if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
+    // Loops thru the allUsers variable, adds [type] parameter
+    // and queries the UserType table for the type name to add to each object
+    for (const user of allUsers) {
+      user.type = (await UserType.findByPk(user.type_id)).type;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    // Returns with status code 200
+    // and displays all users list
+    res.status(200).json(allUsers);
+    
+  } catch (error) {
 
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-      
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
-
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
+    // Returns with status code 500
+    // and displays error
+    res.status(500).json(error);    
   }
 });
 

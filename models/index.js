@@ -2,7 +2,10 @@ const UserType = require("./UserType");
 const User = require("./User");
 const Painting = require("./Painting");
 const PaintingProc = require("./PaintingProc");
-
+const Category = require("./Category");
+const PaintingCat = require("./PaintingCat");
+const Tag = require("./Tag");
+const PaintingTag = require("./PaintingTag");
 
 UserType.hasMany(User, {
     foreignKey: "type_id"
@@ -35,3 +38,42 @@ Painting.hasMany(PaintingProc, {
 PaintingProc.belongsTo(Painting, {
     foreignKey: "painting_id"
 });
+
+Painting.belongsToMany(Category, {
+    through: {
+        model: PaintingCat,
+        unique:false
+    }
+});
+
+Category.belongsToMany(Painting, {
+    through: {
+        model: PaintingCat,
+        unique:false
+    }
+});
+
+Painting.belongsToMany(Tag, {
+    through: {
+        model: PaintingTag,
+        unique:false
+    }
+});
+
+Tag.belongsToMany(Painting, {
+    through: {
+        model: PaintingTag,
+        unique:false
+    }
+});
+
+module.exports = {
+    UserType,
+    User,
+    Painting,
+    PaintingProc,
+    Category,
+    PaintingCat,
+    Tag,
+    PaintingTag
+};
