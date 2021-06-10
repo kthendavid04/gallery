@@ -42,21 +42,27 @@ router.get("/", async (req, res) => {
 
     // Returns with status code 500
     // and displays error
-    res.status(500).json("Please check your input data");
+    res.status(500).json("Unable to get data");
   }
 });
 
+// POST create single user
 router.post("/", async (req, res) => {
 
   try {
 
     // Variable to create user based on the post request body
-    const newUserData = await User.create(req.body);
+    const newUserData = await User.create(req.body, {raw: true});
 
+    // Save to req.session user.id and changed loggedIn to TRUE
     req.session.save(() => {
       req.session.userId = newUserData.id;
       req.session.loggedIn = true;
-      
+
+      // Changes from hashed to text password for returning to user
+      newUserData.password = "Saved!";
+
+      // Returns code to 200 and displays new user object
       res.status(200).json(newUserData);
     });
     
