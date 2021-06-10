@@ -1,6 +1,8 @@
 // Local variables to call on packages
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Category = require('./Category');
+const Painting = require('./Painting');
 
 class PaintingCategory extends Model {}
 
@@ -16,7 +18,7 @@ PaintingCategory.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Painting",
+                model: Painting,
                 key: "id",
                 unique: false
             }
@@ -25,7 +27,7 @@ PaintingCategory.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Category",
+                model: Category,
                 key: "id",
                 unique: false
             }
