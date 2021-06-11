@@ -17,7 +17,6 @@ Category.init(
             allowNull: false,
             unique: true,
             validate: {
-                isAlpha: true,
                 notNull: true,
                 notEmpty: true,
                 len: [3]
