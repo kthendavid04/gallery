@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express');
 const session = require('express-session');
 const routes = require('./controllers');
@@ -28,7 +27,6 @@ app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
-=======
 // Local variables to call on packages
 const express = require("express");
 const session = require("express-session");
@@ -74,5 +72,4 @@ app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log("Now listening on http://localhost:" + PORT));
->>>>>>> origin/master
 });
