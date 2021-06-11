@@ -48,12 +48,15 @@ router.get("/", async (req, res) => {
     try {
         
         // Query for all paintings and saves to variable with raw: true, and excluding password field
-        const paintings = await Painting.findAll({
-            attributes: {
-                exclude: ["image_data"]
-            },
-            raw: true
-        });
+        const paintings = await Painting.findAll({ raw: true });
+
+        // Downloads data from MySQL painting.image_data and creates file into the uploads folder
+        for (const painting of paintings) {
+            fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+
+            // Updates variable to instead show the original filename rather than the BLOB output
+            painting.image_data = "BLOB data";
+        }
 
         // Returns with status code 200
         // and displays all paintings list
@@ -121,7 +124,7 @@ router.post("/", upload.single("image"), async (req, res) => {
         res.status(200).json(painting);
 
         // Deletes the uploaded image from the uploads folder
-        fs.unlinkSync(__basedir + "/uploads/" + req.file.filename);
+        // fs.unlinkSync(__basedir + "/uploads/" + req.file.filename);
         
     } catch (error) {
         

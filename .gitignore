@@ -1,6 +1,6 @@
 # custom/manual
 .DS_Store
-
+uploads/*
 
 # Logs
 logs
