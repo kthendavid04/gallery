@@ -47,7 +47,7 @@ PaintingProc.init(
         },
         end_date: {
             type: DataTypes.DATEONLY,
-            allowNull: false
+            allowNull: true
         },
         price: {
             type: DataTypes.DECIMAL,
