@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const { UserType } = require('../../models');
+const router = require("express").Router();
+const { UserType } = require("../../models");
 const User = require("../../models/User");
 
 // GET route for all users
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     // Query for all users and saves to variable with raw: true, and excluding password field
     const allUsers = await User.findAll({
       attributes: {
-        exclude: ['password']
+        exclude: ["password"]
       },
       raw: true
     });
@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
 
     // Returns with status code 500
     // and displays error
-    res.status(500).json("Unable to get data");
+    res.status(500).json("Unable to get all users");
   }
 });
 
@@ -70,7 +70,47 @@ router.post("/", async (req, res) => {
     
     // Returns with status code 500
     // and displays error
-    res.status(500).json("Please check your input data");
+    res.status(500).json("Unable to create user");
+  }
+});
+
+router.post("/login", async (req, res) => {
+  
+  try {
+
+    // Variables queries database
+    const userLogin = await User.findOne({
+      attributes: {
+        exclude: ["password"]
+      },
+      where: {
+        email: req.body.email
+      }
+    });
+
+    // Checks userLogin returns valid information
+    if (!userLogin) {
+      res
+      .status(400)
+      .json({ message: 'Incorrect username or password, please try again' });
+      return;
+    }
+
+    // Save to req.session user.id and changed loggedIn to TRUE
+    req.session.save(() => {
+      req.session.userId = userLogin.id;
+      req.session.loggedIn = true;
+      
+      // Returns code to 200 and displays new user object
+      res.status(200).json({ user: userLogin, message: 'You are now logged in!' });
+    });
+    
+  } catch (error) {
+    
+    // Returns with status code 500
+    // and displays error
+    res.status(500).json("Unable to login");
+
   }
 });
 
