@@ -47,14 +47,14 @@ router.get("/", async (req, res) => {
     
     try {
         
-        // Query for all paintings and saves to variable with raw: true, and excluding password field
+        // Query for all paintings and saves to variable with raw: true
         const paintings = await Painting.findAll({ raw: true });
 
         // Downloads data from MySQL painting.image_data and creates file into the uploads folder
         for (const painting of paintings) {
             fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
 
-            // Updates variable to instead show the original filename rather than the BLOB output
+            // Updates variable to instead show the original filename rather than the BLOB binary output
             painting.image_data = "BLOB data";
         }
 
@@ -115,7 +115,6 @@ router.post("/", upload.single("image"), async (req, res) => {
             original_painter: req.body.original_painter,
             current_owner: req.body.current_owner
         });
-        // const paintingData = ...painting;
         
         // Updates variable to instead show the original filename rather than the BLOB output
         painting.get({ plain: true }).image_data = "BLOB data";
