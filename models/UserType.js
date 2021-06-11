@@ -32,4 +32,4 @@ UserType.init(
     }
 );
 
-module.exports = UserType;
+// module.exports = UserType;

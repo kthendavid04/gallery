@@ -73,6 +73,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+// PUT route to update single user
+router.put("/:id", async (req, res) => {
+  
+  try {
+    
+  } catch (error) {
+    
+  }
+});
+
 router.post("/login", async (req, res) => {
   
   try {

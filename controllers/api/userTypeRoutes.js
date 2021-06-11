@@ -40,6 +40,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+// PUT route to update single user type
 router.put("/:id", async (req, res) => {
 
     try {
