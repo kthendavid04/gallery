@@ -24,10 +24,18 @@
         <div id="navbarMenuHeroB" class="navbar-menu">
           <div class="navbar-end">
             <a class="navbar-item">
-              Log-In
+              {{!-- Log-In --}}
+<!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
+        <a href="/profile">profile</a> |
+        <button class="no-button" id="logout">logout</button>
+        {{else}}
+        <a href="/login">login</a>
+        {{/if}}
+
             </a>
             <a class="navbar-item">
-              Sign-Up
+            <a href="/Sign-Up" >Sign-Up</a>
             </a>
           </div>
         </div>
@@ -72,6 +80,8 @@
         </div>
         <div class='column'>
           Picture
+          {{{ body }}}
+
         </div>
       </div>
       <div class='columns'>
@@ -84,5 +94,9 @@
       </div>
     </div>
   </section>
+{{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+
   </body>
 </html>
