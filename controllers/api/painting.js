@@ -17,7 +17,7 @@ const ulStorage = multer.diskStorage({
 
 const ulFilter = (req, file, cb) => {
     
-    // In anonymous local variable
+    // Anonymous function local variables
     const fileType = file.mimetype;
     const image = fileType.includes("image");
 
