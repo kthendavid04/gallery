@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
             fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
 
             // Updates variable to instead show the original filename rather than the BLOB binary output
-            painting.image_data = "BLOB data";
+            painting.image_data = "BLOB data - Query by /:id to get the full data of image";
         }
 
         // Returns with status code 200
@@ -117,7 +117,7 @@ router.post("/", upload.single("image"), async (req, res) => {
         });
         
         // Updates variable to instead show the original filename rather than the BLOB output
-        painting.get({ plain: true }).image_data = "BLOB data";
+        painting.get({ plain: true }).image_data = "BLOB data - Query by /:id to get the full data of image";
 
         // Returns code to 200 and displays new painting object
         res.status(200).json(painting);

@@ -1,9 +1,8 @@
 const router = require("express").Router();
-// const userTypeRoutes = require("./userTypeRoutes");
 const userRoutes = require("./userRoutes");
-const paintingRoutes = require("./painting");
+const paintingRoutes = require("./paintingRoutes");
 
-// router.use("/userstypes", userTypeRoutes);
+// Creating routes to individual JS files
 router.use("/users", userRoutes);
 router.use("/paintings", paintingRoutes)
 
