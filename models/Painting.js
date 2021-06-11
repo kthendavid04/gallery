@@ -1,6 +1,6 @@
 // Local variables to call on packages
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class Painting extends Model {}
 
@@ -23,8 +23,12 @@ Painting.init(
                 len: [3]
             }
         },
-        image: {
-            type: DataTypes.BLOB,
+        image_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        image_data: {
+            type: DataTypes.BLOB("long"),
             allowNull: false
         },
         details: {
@@ -36,6 +40,11 @@ Painting.init(
                 notEmpty: true,
                 len: [3]
             }
+        },
+        selling: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         },
         created_date: {
             type: DataTypes.DATEONLY,

@@ -10,6 +10,7 @@ const helpers = require("./utils/helpers");
 // Local declare variables
 const app = express();
 const PORT = process.env.PORT || 3001;
+global.__basedir = __dirname;
 
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers });
@@ -37,6 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use to load static files from the local public folder
 app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
 
 // Set to use the [Routes]
 app.use(routes);
