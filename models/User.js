@@ -2,7 +2,7 @@
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
-const UserType = require('./UserType');
+// const UserType = require('./UserType');
 
 class User extends Model {
     
@@ -78,15 +78,15 @@ User.init(
                 len: [9]
             }
         },
-        type_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: UserType,
-                key: "id",
-                unique: false
-            }
-        }
+        // type_id: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        //     references: {
+        //         model: UserType,
+        //         key: "id",
+        //         unique: false
+        //     }
+        // }
     },
     {
         hooks: {
