@@ -80,8 +80,8 @@
     <div class='columns'>
       <aside class='column is-one-fifth menu'>
         <ul class="menu-list">
-          <li><a class='is-active'>View/Edit Profile</a></li>
-          <li><a>Post New Art Piece</a></li>
+          <li><a>View/Edit Profile</a></li>
+          <li><a class='is-active'>Post New Art Piece</a></li>
           <li><a>View Listed Pieces</a></li>
           <li><a>View Sold Pieces</a></li>
           <li><a>View Purchased Pieces</a></li>
@@ -91,24 +91,53 @@
         <div class='card'>
           <div class='card-header'>
             <div class='card-header-title'>
-             My Profile Info
+             Submit New Art Piece
             </div>
           </div>
           <div class='card-content'>
-           <ul>
-             <li>First Name:</li>
-             <li>Last Name:</li>
-             <li>Email:</li>
-             <button class="button is-small is-primary">
-               Update Info
-             </button>
-           </ul>
+           <form class="box card ml-3" style="width: 60%;">
+    <div class="field">
+      <label class="label">Title</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="e.g. John">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Description</label>
+      <div class="control">
+        <input class="input" type="email" placeholder="e.g. alex@example.com">
+      </div>
+    </div>
+    <div class="field">
+    <label class="label">Asking Price ($):</label>
+  <p class="control">
+    <input class="input" type="text" placeholder="Amount of money">
+  </p>
+</div>
+    <div class="field file is-small has-name">
+    <label class="file-label">
+    <input class="file-input" type="file" name="resume">
+    <span class="file-cta">
+      <span class="file-icon">
+        <i class="fas fa-upload"></i>
+      </span>
+      <span class="file-label">
+        Choose a file…
+      </span>
+    </span>
+    <span class="file-name">
+      Screen Shot 2017-07-29 at 15.54.25.png
+    </span>
+  </label>
+</div>
+    <button class="button is-primary">Create Piece</button>
+  </form>
           </div>
         </div>
 
       </div>
     </div>
-
+  
   </body>
 
 </html>
