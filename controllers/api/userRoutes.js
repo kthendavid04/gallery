@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     let singleObj = {};
     
     // Query for all users and saves to variable with raw: true, and excluding password field
-    const allUsers = await User.findAll({
+    const users = await User.findAll({
       attributes: {
         exclude: ["password"]
       },
@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
 
     // Returns with status code 200
     // and displays all users list
-    res.status(200).json(allUsers);
+    res.status(200).json(users);
     
   } catch {
 
@@ -51,18 +51,18 @@ router.post("/", async (req, res) => {
   try {
 
     // Variable to create user based on the post request body
-    const newUserData = await User.create(req.body, {raw: true});
+    const user = await User.create(req.body, {raw: true});
 
     // Save to req.session user.id and changed loggedIn to TRUE
     req.session.save(() => {
-      req.session.userId = newUserData.id;
+      req.session.userId = user.id;
       req.session.loggedIn = true;
 
       // Changes from hashed to text password for returning to user
-      newUserData.password = "Saved!";
+      user.password = "Saved!";
 
       // Returns code to 200 and displays new user object
-      res.status(200).json(newUserData);
+      res.status(200).json(user);
     });
     
   } catch {
@@ -77,8 +77,34 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   
   try {
+
+    // Runs a update query and saves to variable with a where clause
+    const user = await User.update(req.body, {
+      attributes: {
+        exclude: ["password"]
+      },
+      where: {
+        id: req.params.id
+      }
+    });
+
+    console.log(user);
+
+    // Checks if the user data returned successfully
+    if (user == 0) {
+      res.status(404).json({ result: "No user with this id: " + req.params.id  });
+      return;
+    }
+
+    // Returns with status code 200
+    // and displays successfully updated
+    res.status(200).json({ result: "Success" });
     
   } catch (error) {
+
+    // Returns with status code 500
+    // and displays error
+    res.status(500).json({ result: "Failed" });
     
   }
 });
@@ -101,7 +127,7 @@ router.post("/login", async (req, res) => {
     if (!userLogin) {
       res
       .status(400)
-      .json({ message: 'Incorrect username or password, please try again' });
+      .json({ message: "Incorrect username or password, please try again" });
       return;
     }
 
@@ -111,7 +137,7 @@ router.post("/login", async (req, res) => {
       req.session.loggedIn = true;
       
       // Returns code to 200 and displays new user object
-      res.status(200).json({ user: userLogin, message: 'You are now logged in!' });
+      res.status(200).json({ user: userLogin, message: "You are now logged in!" });
     });
     
   } catch (error) {
