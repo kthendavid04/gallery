@@ -17,7 +17,6 @@ Painting.init(
             allowNull: false,
             unique: true,
             validate: {
-                isAlphanumeric: true,
                 notNull: true,
                 notEmpty: true,
                 len: [3]

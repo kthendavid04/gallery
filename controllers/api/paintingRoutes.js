@@ -2,6 +2,7 @@ const router = require("express").Router();
 const multer = require("multer");
 const fs = require("fs");
 const { Painting } = require("../../models");
+const { route } = require("./userRoutes");
 
 //#region Multer specific variables
 const ulStorage = multer.diskStorage({
@@ -41,7 +42,6 @@ const upload = multer({
 });
 //#endregion
 
-
 // GET route for all paintings
 router.get("/", async (req, res) => {
     
@@ -66,7 +66,7 @@ router.get("/", async (req, res) => {
         
         // Returns with status code 500
         // and displays error
-        res.status(500).json("Unable to get all paintings");
+        res.status(500).json({ result: "Unable to get all paintings"});
     }
 });
 
@@ -96,7 +96,7 @@ router.get("/:id", async (req, res) => {
 
         // Returns with status code 500
         // and displays error
-        res.status(500).json("Unable to get painting by ID");        
+        res.status(500).json({ result: "Unable to get painting by ID" });        
     }
 });
 
@@ -129,7 +129,30 @@ router.post("/", upload.single("image"), async (req, res) => {
         
         // Returns with status code 500
         // and displays error
-        res.status(500).json("Unable to add the painting");
+        res.status(500).json({ result: "Unable to add the painting"});
+    }
+});
+
+router.put("/:id", async (req, res) => {
+
+    try {
+
+        // Local scope variables
+        const updId = req.params.id;
+        const paintingData = await Painting.update(req.body, {
+            where: {
+                id: updId
+            }
+        });
+
+        // Returns the result, with code 200
+        res.status(200).json(paintingData);
+        
+    } catch (error) {
+        
+        // Returns with status code 500
+        // and displays error
+        res.status(500).json({ result: "Unable to update the painting" });
     }
 });
 
