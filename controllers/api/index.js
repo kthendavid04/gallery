@@ -1,19 +1,8 @@
-const router = require('express').Router();
-const userRoutes = require('./userRoutes');
-const projectRoutes = require('./projectRoutes');
+const router = require("express").Router();
+const userTypeRoutes = require("./userTypeRoutes");
+const userRoutes = require("./userRoutes");
 
-router.use('/users', userRoutes);
-router.use('/projects', projectRoutes);
-
-// module.exports = router;
-// const router = require("express").Router();
-// const userRoutes = require("./userRoutes");
-// const gallaryRoutes = require("./gallaryRoutes");
-// const paintingRoutes = require("./paintingsRoutes");
-
-
-// router.use("/users", userRoutes);
-// router.use("/paintings", paintingsRoutes);
-// router.use("/gallary", gallaryRoutes);
+router.use("/userstypes", userTypeRoutes);
+router.use("/users", userRoutes);
 
 module.exports = router;

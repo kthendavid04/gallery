@@ -1,32 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Museum</title>
-  <link rel="stylesheet" type="text/css" href="/css/jass.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
-</head>
-<body>
-  <header>
-    <h1>Welcome to the Galleria Museum</h1>
-  </header>
-  <nav>
-    <a href="/">Home</a>
-    {{#if loggedIn}}
-      <button id="logout" class="btn-no-style">Logout</button>
-    {{else}}
-      <a href="/login">Login</a>
-    {{/if}}
-  </nav>
-  <main>
-    <aside>
-      <h2>Enjoy the galleries!</h2>
-    </aside>
-    <div class="gallery">
-      {{{body}}}
-    </div>
-  </main>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+  </head>
+  <body>
+  <section class="hero is-info is-halfheight">
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <h1>
+            Galleria
+          </h1>
+          <span class="navbar-burger" data-target="navbarMenuHeroB">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroB" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item">
+              Log-In
+            </a>
+            <a class="navbar-item">
+              Sign-Up
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
 
+  <div class="hero-body">
+    <div class="container has-text-centered fade-in-text">
+      <p class="title">
+        Galleria
+      </p>
+      <p class="subtitle">
+        The Future of Buying and Selling Art!
+      </p>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <nav class="tabs is-boxed is-fullwidth">
+      <div class="container">
+        <ul>
+          <li class="is-active has-text-black">
+            <a>Overview</a>
+          </li>
+          <li>
+            <a>Browse the Galleries</a>
+          </li>
+          <li>
+            <a>Meet the Team</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
+  <section class="section">
+    <div class="container">
+      <div class='columns'>
+        <div class='column'>
+          Text
+        </div>
+        <div class='column'>
+          Picture
+        </div>
+      </div>
+      <div class='columns'>
+        <div class='column'>
+          Picture
+        </div>
+        <div class='column'>
+          Text
+        </div>
+      </div>
+    </div>
+  </section>
+  </body>
 </html>

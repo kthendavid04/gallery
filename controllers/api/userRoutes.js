@@ -1,66 +1,5 @@
-const router = require('express').Router();
-const { User } = require('../../models');
-
-router.post('/', async (req, res) => {
-  try {
-    const userData = await User.create(req.body);
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-
-      res.status(200).json(userData);
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.post('/login', async (req, res) => {
-  try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
-
-    if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-
-    const validPassword = await userData.checkPassword(req.body.password);
-
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-      
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
-
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
-
-// module.exports = router;
-// const { UserType } = require('../../models');
-// const User = require("../../models/User");
+const router = require("express").Router();
+const { User } = require("../../models");
 
 // GET route for all users
 router.get("/", async (req, res) => {
@@ -73,7 +12,7 @@ router.get("/", async (req, res) => {
     // Query for all users and saves to variable with raw: true, and excluding password field
     const allUsers = await User.findAll({
       attributes: {
-        exclude: ['password']
+        exclude: ["password"]
       },
       raw: true
     });
@@ -102,7 +41,7 @@ router.get("/", async (req, res) => {
 
     // Returns with status code 500
     // and displays error
-    res.status(500).json("Unable to get data");
+    res.status(500).json("Unable to get all users");
   }
 });
 
@@ -130,7 +69,47 @@ router.post("/", async (req, res) => {
     
     // Returns with status code 500
     // and displays error
-    res.status(500).json("Please check your input data");
+    res.status(500).json("Unable to create user");
+  }
+});
+
+router.post("/login", async (req, res) => {
+  
+  try {
+
+    // Variables queries database
+    const userLogin = await User.findOne({
+      attributes: {
+        exclude: ["password"]
+      },
+      where: {
+        email: req.body.email
+      }
+    });
+
+    // Checks userLogin returns valid information
+    if (!userLogin) {
+      res
+      .status(400)
+      .json({ message: 'Incorrect username or password, please try again' });
+      return;
+    }
+
+    // Save to req.session user.id and changed loggedIn to TRUE
+    req.session.save(() => {
+      req.session.userId = userLogin.id;
+      req.session.loggedIn = true;
+      
+      // Returns code to 200 and displays new user object
+      res.status(200).json({ user: userLogin, message: 'You are now logged in!' });
+    });
+    
+  } catch (error) {
+    
+    // Returns with status code 500
+    // and displays error
+    res.status(500).json("Unable to login");
+
   }
 });
 
