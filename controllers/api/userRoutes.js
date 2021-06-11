@@ -58,9 +58,9 @@ router.post('/logout', (req, res) => {
   }
 });
 
-module.exports = router;
-const { UserType } = require('../../models');
-const User = require("../../models/User");
+// module.exports = router;
+// const { UserType } = require('../../models');
+// const User = require("../../models/User");
 
 // GET route for all users
 router.get("/", async (req, res) => {

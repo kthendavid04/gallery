@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS k7yj92caohjw6hwj;
 DROP DATABASE IF EXISTS ecommerce_art_db;
 CREATE DATABASE ecommerce_art_db;
 
