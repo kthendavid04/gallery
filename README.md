@@ -1,8 +1,8 @@
-[![GitHub issues](https://img.shields.io/github/issues/kthendavid04/gallery)](https://github.com/kthendavid04/gallery/issues)[![GitHub forks](https://img.shields.io/github/forks/kthendavid04/gallery)](https://github.com/kthendavid04/gallery/network)
+[![GitHub license](https://img.shields.io/github/license/kthendavid04/gallery?style=plastic)](https://github.com/kthendavid04/gallery/blob/master/LICENSE)
 
-[![GitHub stars](https://img.shields.io/github/stars/kthendavid04/gallery)](https://github.com/kthendavid04/gallery/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/kthendavid04/gallery?style=plastic)](https://github.com/kthendavid04/gallery/issues)[![GitHub forks](https://img.shields.io/github/forks/kthendavid04/gallery?style=plastic)](https://github.com/kthendavid04/gallery/network) [![GitHub stars](https://img.shields.io/github/stars/kthendavid04/gallery?style=plastic)](https://github.com/kthendavid04/gallery/stargazers)
 
-[![GitHub license](https://img.shields.io/github/license/kthendavid04/gallery)](https://github.com/kthendavid04/gallery)
+
 
 
 # Gallery
