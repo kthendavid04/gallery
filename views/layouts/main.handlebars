@@ -12,6 +12,26 @@
   <div class="hero-head">
     <nav class="navbar">
       <div class="container">
+        {{#if loggedIn}}
+        <div class="navbar-brand">
+          <span class="navbar-burger has-background-white" data-target="navbarMenuHeroB">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroB" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" href='/profile'>
+              My Profile
+            </a>
+            <button id='logout' class='btn-no-style'>Logout</button>
+            {{!-- <a class="navbar-item" href='/signup'>
+              Logout
+            </a> --}}
+          </div>
+        </div>
+        {{else}}
         <div class="navbar-brand">
           <span class="navbar-burger has-background-white" data-target="navbarMenuHeroB">
             <span></span>
@@ -29,6 +49,7 @@
             </a>
           </div>
         </div>
+        {{/if}}
       </div>
     </nav>
   </div>
@@ -64,4 +85,32 @@
 </section>
  {{{body}}}
   </body>
+    <script src='./js/logout.js'></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+</script>
 </html>
