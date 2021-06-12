@@ -17,7 +17,6 @@ UserType.init(
             allowNull: false,
             unique: true,
             validate: {
-                isAlpha: true,
                 notNull: true,
                 notEmpty: true,
                 len: [3]
@@ -33,4 +32,4 @@ UserType.init(
     }
 );
 
-module.exports = UserType;
+// module.exports = UserType;

@@ -10,36 +10,20 @@ PaintingProc.init(
     {
         id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
         seller_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: User,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         },
         buyer_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: User,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         },
         painting_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: Painting,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         },
         start_date: {
             type: DataTypes.DATEONLY,
@@ -47,7 +31,7 @@ PaintingProc.init(
         },
         end_date: {
             type: DataTypes.DATEONLY,
-            allowNull: false
+            allowNull: true
         },
         price: {
             type: DataTypes.DECIMAL,

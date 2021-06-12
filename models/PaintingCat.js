@@ -16,21 +16,11 @@ PaintingCategory.init(
         },
         painting_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: Painting,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         },
         category_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: Category,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         }
     },
     {
