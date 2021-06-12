@@ -10,23 +10,23 @@
       </section>
     </section>
   </body>
-  <form class="box card ml-3" style="width: 60%;">
+  <form class="box card ml-3 signup-form" style="width: 60%;">
     <div class="field">
       <label class="label">First Name</label>
       <div class="control">
-        <input class="input" type="text" placeholder="e.g. John">
+        <input class="input" type="text" placeholder="e.g. John" id='firstname'>
       </div>
     </div>
     <div class="field">
       <label class="label">Last Name</label>
       <div class="control">
-        <input class="input" type="text" placeholder="e.g. Smith" id='firstname'>
+        <input class="input" type="text" placeholder="e.g. Smith" id='lastname'>
       </div>
     </div>
     <div class="field">
       <label class="label">Email</label>
       <div class="control">
-        <input class="input" type="email" placeholder="e.g. jsmith@email.com" id='lastname'>
+        <input class="input" type="email" placeholder="e.g. jsmith@email.com" id='email'>
       </div>
     </div>
 
@@ -48,5 +48,8 @@
         <input class="input" type="text" placeholder="e.g. 1234567890" id='bankinfo'>
       </div>
     </div>
-    <button class="button is-primary">Create Account</button>
+    <button type='submit' class="button is-primary">Create Account</button>
   </form>
+
+  
+  <script src='./js/signup.js'></script>

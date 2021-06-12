@@ -4,7 +4,7 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    res.render("homepage");
+    res.render("homepage", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 
 router.get("/gallery", async (req, res) => {
   try {
-    res.render("gallery");
+    res.render("gallery", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -20,7 +20,7 @@ router.get("/gallery", async (req, res) => {
 
 router.get("/gallery/oldest", async (req, res) => {
   try {
-    res.render("galleryOldest");
+    res.render("galleryOldest", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -28,7 +28,7 @@ router.get("/gallery/oldest", async (req, res) => {
 
 router.get("/gallery/category", async (req, res) => {
   try {
-    res.render("galleryCategory");
+    res.render("galleryCategory", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -36,7 +36,7 @@ router.get("/gallery/category", async (req, res) => {
 
 router.get("/gallery/tag", async (req, res) => {
   try {
-    res.render("galleryTag");
+    res.render("galleryTag", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -44,7 +44,7 @@ router.get("/gallery/tag", async (req, res) => {
 
 router.get("/gallery/pricelowtohigh", async (req, res) => {
   try {
-    res.render("galleryLow");
+    res.render("galleryLow", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -52,7 +52,7 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
 
 router.get("/gallery/pricehightolow", async (req, res) => {
   try {
-    res.render("galleryHigh");
+    res.render("galleryHigh", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -60,7 +60,7 @@ router.get("/gallery/pricehightolow", async (req, res) => {
 
 router.get("/gallery/artistname", async (req, res) => {
   try {
-    res.render("galleryArtist");
+    res.render("galleryArtist", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -68,7 +68,7 @@ router.get("/gallery/artistname", async (req, res) => {
 
 router.get("/gallery/artworkname", async (req, res) => {
   try {
-    res.render("galleryArtwork");
+    res.render("galleryArtwork", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -76,7 +76,7 @@ router.get("/gallery/artworkname", async (req, res) => {
 
 router.get("/signup", async (req, res) => {
   try {
-    res.render("signup");
+    res.render("signup", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -84,7 +84,7 @@ router.get("/signup", async (req, res) => {
 
 router.get("/profile", async (req, res) => {
   try {
-    res.render("profile");
+    res.render("profile", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -92,7 +92,7 @@ router.get("/profile", async (req, res) => {
 
 router.get("/profile/newart", async (req, res) => {
   try {
-    res.render("profileNewArt");
+    res.render("profileNewArt", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -100,7 +100,7 @@ router.get("/profile/newart", async (req, res) => {
 
 router.get("/profile/listed", async (req, res) => {
   try {
-    res.render("profileListed");
+    res.render("profileListed", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -108,7 +108,7 @@ router.get("/profile/listed", async (req, res) => {
 
 router.get("/profile/purchased", async (req, res) => {
   try {
-    res.render("profilePurchased");
+    res.render("profilePurchased", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -116,7 +116,7 @@ router.get("/profile/purchased", async (req, res) => {
 
 router.get("/profile/sold", async (req, res) => {
   try {
-    res.render("profileSold");
+    res.render("profileSold", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -124,7 +124,7 @@ router.get("/profile/sold", async (req, res) => {
 
 router.get("/sale/:id", async (req, res) => {
   try {
-    res.render('sale');
+    res.render('sale', { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -132,7 +132,7 @@ router.get("/sale/:id", async (req, res) => {
 
 router.get("/meet", async (req, res) => {
   try {
-    res.render('meet');
+    res.render('meet', { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
