@@ -49,7 +49,14 @@ router.get("/", async (req, res) => {
         
         // Query for all paintings and saves to variable
         const paintings = await Painting.findAll({
-            include: [{model: Category}]
+            include: [
+                {
+                    model: Category
+                },
+                {
+                    model: Tag
+                }
+            ]
         });
 
         // Downloads data from MySQL painting.image_data and creates file into the uploads folder
@@ -82,7 +89,15 @@ router.get("/:id", async (req, res) => {
         const indvPainting = await Painting.findByPk(paintingId, {
             where: {
                 id: paintingId
-            }
+            },
+            include: [
+                {
+                    model: Category
+                },
+                {
+                    model: Tag
+                }
+            ]
         });
 
         // Downloads data from MySQL painting.image_data and creates file into the uploads folder
