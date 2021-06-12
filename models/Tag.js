@@ -19,7 +19,7 @@ Tag.init(
             validate: {
                 notNull: true,
                 notEmpty: true,
-                len: [3]
+                len: [2]
             }
         }
     },

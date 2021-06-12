@@ -16,21 +16,11 @@ PaintingTag.init(
         },
         painting_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: Painting,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         },
         tag_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: Tag,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         }
     },
     {

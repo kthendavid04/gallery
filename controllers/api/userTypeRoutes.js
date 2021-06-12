@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     try {
         
         // Query for all user types
-        const userType = await UserType.findAll({ raw: true });
+        const userType = await UserType.findAll();
 
         // Returns with status code 200
         // and displays all users types list

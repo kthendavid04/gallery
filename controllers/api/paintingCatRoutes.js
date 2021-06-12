@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     try {
         
         // Local scope variables
-        const paintingCat = await PaintingCat.findAll({ raw: true });
+        const paintingCat = await PaintingCat.findAll();
 
         // Returns with status code 200
         // and displays all paintings categories

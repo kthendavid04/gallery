@@ -32,19 +32,25 @@ const seedAll = async () => {
   }
 
   // Query for all paintings ID
-  const paintings = await Painting.findAll({ attributes: ["id"], raw: true });
+  const paintings = await Painting.findAll({ attributes: ["id"] });
 
   // Creates all the painting procurements
   for (const painting of paintings) {
 
-    await PaintingProc.create({
+    try {
+      console.log(await PaintingProc.create({
         seller_id: users[Math.floor(Math.random() * users.length)].id,
         buyer_id: users[Math.floor(Math.random() * users.length)].id,
         painting_id: paintings[Math.floor(Math.random() * paintings.length)].id,
         start_date: "2021-01-01",
         end_date: null,
         price: Math.floor(Math.random() * (1000000.00 - 1000.00 + 1000.00)) + 1000.00
-    });
+    }));
+      
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   // Create all categories
@@ -54,12 +60,11 @@ const seedAll = async () => {
   for (const category of categories) {
 
     await PaintingCat.create({
-      painting_id: paintings[Math.floor(Math.random() * paintings.length)].id,
-      category_id: categories[Math.floor(Math.random() * categories.length)].id
+      painting_id: paintings[Math.floor(Math.random() * (paintings.length - 1) + 1)].id,
+      category_id: categories[Math.floor(Math.random() * (categories.length - 1) + 1)].id
     });
   }
 
-  // Create all tags
   const tags = await Tag.bulkCreate(tagData);
 
   // Create all painting tags mix
