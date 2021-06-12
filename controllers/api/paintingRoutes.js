@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const multer = require("multer");
 const fs = require("fs");
-const { Painting } = require("../../models");
+const { Painting, Category, Tag } = require("../../models");
 const { route } = require("./userRoutes");
 
 //#region Multer specific variables
@@ -47,8 +47,17 @@ router.get("/", async (req, res) => {
     
     try {
         
-        // Query for all paintings and saves to variable with raw: true
-        const paintings = await Painting.findAll({ raw: true });
+        // Query for all paintings and saves to variable
+        const paintings = await Painting.findAll({
+            include: [
+                {
+                    model: Category
+                },
+                {
+                    model: Tag
+                }
+            ]
+        });
 
         // Downloads data from MySQL painting.image_data and creates file into the uploads folder
         for (const painting of paintings) {
@@ -80,7 +89,15 @@ router.get("/:id", async (req, res) => {
         const indvPainting = await Painting.findByPk(paintingId, {
             where: {
                 id: paintingId
-            }
+            },
+            include: [
+                {
+                    model: Category
+                },
+                {
+                    model: Tag
+                }
+            ]
         });
 
         // Downloads data from MySQL painting.image_data and creates file into the uploads folder

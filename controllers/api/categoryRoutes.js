@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Category } = require("../../models");
+const { Category, Painting } = require("../../models");
 
 // GET route for all categories
 router.get("/", async (req, res) => {
@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     try {
         
         // Local scope variables
-        const categories = await Category.findAll({ raw: true });
+        const categories = await Category.findAll({ include: [{model: Painting}] });
 
         // Returns with status code 200
         // and displays all paintings list

@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const fs = require("fs");
 const { User, Painting, PaintingProc, Category, PaintingCat, Tag, PaintingTag } = require("../models");
 const withAuth = require("../utils/auth");
 
@@ -12,7 +13,24 @@ router.get("/", async (req, res) => {
 
 router.get("/gallery", async (req, res) => {
   try {
-    res.render("gallery");
+
+    // Local scope variables
+    const paintings = await Painting.findAll({
+      include: [
+        { model: Category },
+        { model: Tag }
+      ]
+    });
+
+    // Downloads data from MySQL painting.image_data and creates file into the uploads folder
+    for (const painting of paintings) {
+      fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      painting.image_data = "/uploads/" + painting.image_name;
+    }
+
+    // Goes to Gallery handlebar, and pass paintings
+    res.render("gallery", { paintings });
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -117,6 +135,22 @@ router.get("/profile/purchased", async (req, res) => {
 router.get("/profile/sold", async (req, res) => {
   try {
     res.render("profileSold");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/sale/:id", async (req, res) => {
+  try {
+    res.render('sale');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/meet", async (req, res) => {
+  try {
+    res.render('meet');
   } catch (err) {
     res.status(500).json(err);
   }
