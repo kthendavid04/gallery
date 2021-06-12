@@ -118,7 +118,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST single painting
-router.post("/", upload.single("image"), async (req, res) => {
+router.post("/", upload.single("image_data"), async (req, res) => {
 
     try {
 
@@ -128,6 +128,7 @@ router.post("/", upload.single("image"), async (req, res) => {
             image_name: req.file.filename,
             image_data: fs.readFileSync(__basedir + "/uploads/" + req.file.filename),
             details: req.body.details,
+            selling: req.body.selling,
             created_date: req.body.created_date,
             original_painter: req.body.original_painter,
             current_owner: req.body.current_owner
@@ -150,11 +151,12 @@ router.post("/", upload.single("image"), async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
-
+router.put("/:id", upload.single("image_data"), async (req, res) => {
+    
     try {
 
         // Local scope variables
+        let paintingImg;
         const updId = req.params.id;
         const paintingData = await Painting.update(req.body, {
             where: {
@@ -162,14 +164,33 @@ router.put("/:id", async (req, res) => {
             }
         });
 
-        // Returns the result, with code 200
-        res.status(200).json(paintingData);
+        // Checks if the req contains a file property
+        if (req.hasOwnProperty("file")) {
+            
+            // Runs an update for image_name and image_data, where it matches PK
+            paintingImg = await Painting.update(
+                {
+                    image_name: req.file.filename,
+                    image_data: fs.readFileSync(__basedir + "/uploads/" + req.file.filename)
+                },
+                {
+                    where: {
+                        id: updId
+                    }
+                }
+            );
+        }
+
+        // Returns the result, with code 200 by checking if the user performed an
+        // update on the other fields, excluding image_data, or just image_data
+        res.status(200).json((paintingData[0] == 1) ? paintingData : paintingImg);
         
     } catch (error) {
         
         // Returns with status code 500
         // and displays error
-        res.status(500).json({ result: "Unable to update the painting" });
+        // res.status(500).json({ result: "Unable to update the painting" });
+        res.status(500).json(error);
     }
 });
 
