@@ -2,8 +2,9 @@ const sequelize = require('../config/connection');
 const userData = require("./userData.json");
 const paintingData = require("./paintingData.json");
 const categoryData = require("./categoryData.json");
+const tagData = require("./tagData.json");
 
-const { User, Painting, PaintingProc, Category, PaintingCat } = require("../models");
+const { User, Painting, PaintingProc, Category, PaintingCat, Tag, PaintingTag } = require("../models");
 
 const seedAll = async () => {
   
@@ -49,14 +50,24 @@ const seedAll = async () => {
   // Create all categories
   const categories = await Category.bulkCreate(categoryData);
 
-  console.log(categories);
-
   // Create all painting categories mix
   for (const category of categories) {
 
     await PaintingCat.create({
       painting_id: paintings[Math.floor(Math.random() * paintings.length)].id,
       category_id: categories[Math.floor(Math.random() * categories.length)].id
+    });
+  }
+
+  // Create all tags
+  const tags = await Tag.bulkCreate(tagData);
+
+  // Create all painting tags mix
+  for (const tag of tags) {
+
+    await PaintingTag.create({
+      painting_id: paintings[Math.floor(Math.random() * paintings.length)].id,
+      tag_id: tags[Math.floor(Math.random() * tags.length)].id
     });
   }
   
