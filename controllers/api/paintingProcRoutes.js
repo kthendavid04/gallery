@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     try {
         
         // Query for all paintings procurements and save results to variable
-        const procurements = await PaintingProc.findAll({ raw: true });
+        const procurements = await PaintingProc.findAll();
 
         // Returns with status code 200
         // and displays all paintings list
