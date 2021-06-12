@@ -16,30 +16,15 @@ PaintingProc.init(
         },
         seller_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: User,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         },
         buyer_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: User,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         },
         painting_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: Painting,
-                key: "id",
-                unique: false
-            }
+            allowNull: false
         },
         start_date: {
             type: DataTypes.DATEONLY,
