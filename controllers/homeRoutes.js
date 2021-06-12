@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { userType, User, Painting, PaintingProc, Category, PaintingCat, Tag, PaintingTag } = require("../models");
+const { User, Painting, PaintingProc, Category, PaintingCat, Tag, PaintingTag } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
@@ -10,27 +10,139 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/post/:id", async (req, res) => {
+router.get("/gallery", async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-      ],
-    });
-
-    const post = postData.get({ plain: true });
-
-    res.render("post", {
-      ...post,
-      logged_in: req.session.logged_in
-    });
+    res.render("gallery");
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+router.get("/gallery/oldest", async (req, res) => {
+  try {
+    res.render("galleryOldest");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/gallery/category", async (req, res) => {
+  try {
+    res.render("galleryCategory");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/gallery/tag", async (req, res) => {
+  try {
+    res.render("galleryTag");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/gallery/pricelowtohigh", async (req, res) => {
+  try {
+    res.render("galleryLow");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/gallery/pricehightolow", async (req, res) => {
+  try {
+    res.render("galleryHigh");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/gallery/artistname", async (req, res) => {
+  try {
+    res.render("galleryArtist");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/gallery/artworkname", async (req, res) => {
+  try {
+    res.render("galleryArtwork");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/signup", async (req, res) => {
+  try {
+    res.render("signup");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/profile", async (req, res) => {
+  try {
+    res.render("profile");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/profile/newart", async (req, res) => {
+  try {
+    res.render("profileNewArt");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/profile/listed", async (req, res) => {
+  try {
+    res.render("profileListed");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/profile/purchased", async (req, res) => {
+  try {
+    res.render("profilePurchased");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/profile/sold", async (req, res) => {
+  try {
+    res.render("profileSold");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// router.get("/post/:id", async (req, res) => {
+//   try {
+//     const postData = await Post.findByPk(req.params.id, {
+//       include: [
+//         {
+//           model: User,
+//           attributes: ["name"],
+//         },
+//       ],
+//     });
+
+//     const post = postData.get({ plain: true });
+
+//     res.render("post", {
+//       ...post,
+//       logged_in: req.session.logged_in
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // comments
 
