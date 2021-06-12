@@ -1,0 +1,74 @@
+[
+    {
+        "title": "Blossoming Apricot",
+        "image_name": "01-blossoming-apricot.jpg",
+        "image_data": "../public/images/01-blossoming-apricot.jpg",
+        "details": "Blossoming Apricot",
+        "selling": false,
+        "created_date": "2021-06-12"
+    },
+    {
+        "title": "Cosmos Flowers",
+        "image_name": "02-cosmos-flowers.jpg",
+        "image_data": "../public/images/02-cosmos-flowers.jpg",
+        "details": "Cosmos Flowers",
+        "selling": false,
+        "created_date": "2021-06-12"
+    },
+    {
+        "title": "Sand Sea Summer",
+        "image_name": "03-sand-sea-summer.jpg",
+        "image_data": "../public/images/03-sand-sea-summer.jpg",
+        "details": "Sand Sea Summer",
+        "selling": false,
+        "created_date": "2021-06-12"
+    },
+    {
+        "title": "Beach Chairs",
+        "image_name": "04-beach-chairs.jpg",
+        "image_data": "../public/images/04-beach-chairs.jpg",
+        "details": "Beach Chairs",
+        "selling": false,
+        "created_date": "2021-06-12"
+    },
+    {
+        "title": "Beach Sunrise",
+        "image_name": "05-beach-sunrise.jpg",
+        "image_data": "../public/images/05-beach-sunrise.jpg",
+        "details": "Beach Sunrise",
+        "selling": false,
+        "created_date": "2021-06-12"
+    },
+    {
+        "title": "Fall Colors",
+        "image_name": "06-fall-colors.jpg",
+        "image_data": "../public/images/06-fall-colors.jpg",
+        "details": "Fall Colors",
+        "selling": false,
+        "created_date": "2021-06-12"
+    },
+    {
+        "title": "Autumn Mountains",
+        "image_name": "07-autumn-mountains.jpg",
+        "image_data": "../public/images/07-autumn-mountains.jpg",
+        "details": "Autumn Mountains",
+        "selling": false,
+        "created_date": "2021-06-12"
+    },
+    {
+        "title": "Frozen River",
+        "image_name": "08-frozen-river.jpg",
+        "image_data": "../public/images/08-frozen-river.jpg",
+        "details": "Frozen River",
+        "selling": false,
+        "created_date": "2021-06-12"
+    },
+    {
+        "title": "Winter Home",
+        "image_name": "09-winter-home.jpg",
+        "image_data": "../public/images/09-winter-home.jpg",
+        "details": "Winter Home",
+        "selling": false,
+        "created_date": "2021-06-12"
+    }
+]

@@ -73,42 +73,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// PUT route to update single user
-router.put("/:id", async (req, res) => {
-  
-  try {
-
-    // Runs a update query and saves to variable with a where clause
-    const user = await User.update(req.body, {
-      attributes: {
-        exclude: ["password"]
-      },
-      where: {
-        id: req.params.id
-      }
-    });
-
-    console.log(user);
-
-    // Checks if the user data returned successfully
-    if (user == 0) {
-      res.status(404).json({ result: "No user with this id: " + req.params.id  });
-      return;
-    }
-
-    // Returns with status code 200
-    // and displays successfully updated
-    res.status(200).json({ result: "Success" });
-    
-  } catch (error) {
-
-    // Returns with status code 500
-    // and displays error
-    res.status(500).json({ result: "Failed" });
-    
-  }
-});
-
 router.post("/login", async (req, res) => {
   
   try {
