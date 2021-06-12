@@ -23,7 +23,6 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlpha: true,
                 notNull: true,
                 notEmpty: true,
                 len: [3]
@@ -33,7 +32,6 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlpha: true,
                 notNull: true,
                 notEmpty: true,
                 len: [3]
