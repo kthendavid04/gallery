@@ -1,16 +1,23 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Painting } = require("../../models");
 
 // GET route for all users
 router.get("/", async (req, res) => {
   
   try {
 
-    let usersList = [];
-    let singleObj = {};
-    
     // Query for all users and saves to variable and excluding password field
-    const users = await User.findAll({ attributes: {exclude: ["password"]} });
+    const users = await User.findAll({
+      attributes: {exclude: ["password"]},
+      include: [
+        {
+          model: Painting,
+          attributes: {
+            exclude: ["image_data"]
+          }
+        }
+      ]
+    });
 
     // Returns with status code 200
     // and displays all users list
@@ -20,7 +27,7 @@ router.get("/", async (req, res) => {
 
     // Returns with status code 500
     // and displays error
-    res.status(500).json("Unable to get all users");
+    res.status(500).json({result: "Unable to get all users"});
   }
 });
 
@@ -48,7 +55,7 @@ router.post("/", async (req, res) => {
     
     // Returns with status code 500
     // and displays error
-    res.status(500).json("Unable to create user");
+    res.status(500).json({ result: "Unable to create user"});
   }
 });
 
@@ -87,8 +94,7 @@ router.post("/login", async (req, res) => {
     
     // Returns with status code 500
     // and displays error
-    res.status(500).json("Unable to login");
-
+    res.status(500).json({ result: "Unable to login" });
   }
 });
 
@@ -124,7 +130,6 @@ router.put("/:id", async (req, res) => {
     // Returns with status code 500
     // and displays error
     res.status(500).json({ result: "Failed" });
-    
   }
 });
 
