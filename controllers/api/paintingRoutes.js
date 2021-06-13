@@ -128,10 +128,10 @@ router.post("/", upload.single("image_data"), async (req, res) => {
             image_name: req.file.filename,
             image_data: fs.readFileSync(__basedir + "/uploads/" + req.file.filename),
             details: req.body.details,
-            selling: req.body.selling,
+            selling: true,
             created_date: req.body.created_date,
-            original_painter: req.body.original_painter,
-            current_owner: req.body.current_owner
+            original_painter: req.session.userId,
+            current_owner: req.session.userId
         });
         
         // Updates variable to instead show the original filename rather than the BLOB output
