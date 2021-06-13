@@ -5,23 +5,21 @@
                 <div class="card">
   <div class="card-image image-left">
     <figure class="image is-4by3">
-      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+      <img src="{{sale.image_data}}" alt="Placeholder image">
     </figure>
   </div>
   <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <p class="title is-4">Artwork Name</p>
-        <p class="subtitle is-6">Artist Name</p>
+        <p class="title is-4" data-desc='{{paintingProc.id}}' id='paintingProcId'>{{sale.title}}</p>
+        <p class="subtitle is-6">Original art by {{seller.first_name}} {{seller.last_name}}</p>
       </div>
     </div>
 
     <div class="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Phasellus nec iaculis mauris. <a href="#">@artist</a>.
-      <a href="#">Categories</a> <a href="#">Tags</a>
+      {{sale.details}}
       <br>
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      <time datetime="2016-1-1">{{sale.date_created}}</time>
     </div>
   </div>
 </div>
@@ -29,12 +27,12 @@
             <div class='column'>
                 <div class='card'>
                     <div class='card-content'>
-                        <h2>Buyer name:</h2>
-                        <h3>Buyer address:</h3>
-                        <h3>Purchase price:</h3>
+                        <h2 id="buyer" data-desc='{{buyer.id}}'>Buyer name: {{buyer.first_name}} {{buyer.last_name}}</h2>
+                        <h3>Buyer address: {{buyer.address}}</h3>
+                        <h3>Purchase price: {{paintingProc.price}}</h3>
                     </div>
                     <div class='card-footer'>
-                        <a href='/profile/purchased'><button class="button is-primary" type='submit'>Confirm Purchase</button></a>
+                        <button class="button is-primary" type='submit' id="buy">Confirm Purchase</button>
                     </div>
                 </div>
             </div>
@@ -65,3 +63,5 @@
 </div> --}}
     </div>
 </section>
+
+<script src='/js/sale.js'></script>

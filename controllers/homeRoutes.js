@@ -147,7 +147,23 @@ router.get("/profile/sold", withAuth, async (req, res) => {
 
 router.get("/sale/:id", async (req, res) => {
   try {
-    res.render('sale', { loggedIn: req.session.loggedIn });
+    const buyer_id = req.session.userId;
+    const dbSaleData = await Painting.findByPk(req.params.id);
+    const dbBuyerData = await User.findByPk(buyer_id);
+
+    const sale = dbSaleData.get({ plain: true });
+    const buyer = dbBuyerData.get({ plain: true });
+
+    const dbPaintingProcData = await PaintingProc.findOne({ where: { painting_id: sale.id}});
+    const paintingProc = dbPaintingProcData.get({ plain: true });
+
+    const dbSellerData = await User.findOne({ where: { id: sale.original_painter}});
+    const seller = dbSellerData.get({ plain: true });
+    console.log(sale);
+    console.log(buyer);
+    console.log(paintingProc);
+    console.log(seller);
+    res.render('sale', { sale, buyer, paintingProc, seller, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
