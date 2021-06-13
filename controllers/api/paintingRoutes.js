@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const multer = require("multer");
 const fs = require("fs");
-const { Painting, Category, Tag } = require("../../models");
+const { Painting, PaintingProc, Category, Tag } = require("../../models");
 const dTim = new Date().toISOString();
 const dTimName = dTim.toString().replace(/:/g, ".");
 
@@ -133,7 +133,15 @@ router.post("/", upload.single("image_data"), async (req, res) => {
             original_painter: painter,
             current_owner: owner
         });
-        
+        const procurement = await PaintingProc.create({
+            seller_id: owner,
+            buyer_id: null,
+            painting_id: painting.id,
+            start_date: dTim,
+            end_date: null,
+            price: parseFloat(req.body.price)
+        });
+
         // Updates variable to instead show the original filename rather than the BLOB output
         painting.get({ plain: true }).image_data = "BLOB data - Query by /:id to get the full data of image";
 
