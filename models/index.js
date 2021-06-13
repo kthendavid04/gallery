@@ -1,4 +1,5 @@
 // const UserType = require("./UserType");
+const sequelize = require("../config/connection");
 const User = require("./User");
 const Painting = require("./Painting");
 const PaintingProc = require("./PaintingProc");
@@ -20,6 +21,34 @@ User.belongsToMany(Painting, {
         model: PaintingProc,
         unique: false,
     },
+    foreignKey: "buyer_id"
+});
+
+Painting.hasMany(PaintingProc, {
+    foreignKey: "painting_id"
+});
+
+PaintingProc.belongsTo(Painting, {
+    foreignKey: "painting_id"
+});
+
+User.hasMany(PaintingProc, {
+    as: "seller",
+    foreignKey: "seller_id"
+});
+
+User.hasMany(PaintingProc, {
+    as: "buyer",
+    foreignKey: "buyer_id"
+})
+
+PaintingProc.belongsTo(User, {
+    as: "seller",
+    foreignKey: "seller_id"
+});
+
+PaintingProc.belongsTo(User, {
+    as: "buyer",
     foreignKey: "buyer_id"
 });
 

@@ -36,18 +36,23 @@ const seedAll = async () => {
 
   // Query for all paintings ID
   const paintings = await Painting.findAll({ attributes: ["id"] });
+  let paintingNewid = 1;
 
   // Creates all the painting procurements
   for (const painting of paintings) {
+
+    console.log(paintingNewid);
     
     await PaintingProc.create({
         seller_id: users[Math.floor(Math.random() * users.length)].id,
         buyer_id: users[Math.floor(Math.random() * users.length)].id,
-        painting_id: paintings[Math.floor(Math.random() * paintings.length)].id,
+        painting_id: paintingNewid,
         start_date: "2021-01-01",
         end_date: null,
         price: Math.floor(Math.random() * (1000000.00 - 1000.00 + 1000.00)) + 1000.00
     });
+
+    paintingNewid++;
   }
 
   // Create all categories
