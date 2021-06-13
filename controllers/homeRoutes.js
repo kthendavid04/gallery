@@ -204,7 +204,19 @@ router.get("/profile/newart", withAuth, async (req, res) => {
 
 router.get("/profile/listed", withAuth, async (req, res) => {
   try {
-    res.render("profileListed", { loggedIn: req.session.loggedIn });
+    const paintings = await Painting.findAll({ 
+      where: { current_owner: req.session.userId, selling: true }, raw: true }, {include: [{ model: PaintingProc}]});
+
+    for (const painting of paintings) {
+      fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      painting.image_data = "/uploads/" + painting.image_name;
+    }
+  
+    //const dbPaintingProcData = await PaintingProc.findAll({ where: { seller_id: req.session.userId}, raw: true})
+    //const dbUserData = await User.
+    //const allPaintings = paintings.map((painting) => painting.get({plain: true}));
+    console.log(paintings);
+    res.render("profileListed", { paintings, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -230,8 +242,10 @@ router.get("/sale/:id", async (req, res) => {
   try {
     const buyer_id = req.session.userId;
     const dbSaleData = await Painting.findByPk(req.params.id);
+    fs.writeFileSync(__basedir + "/uploads/" + dbSaleData.image_name, dbSaleData.image_data);
+    dbSaleData.image_data = "/uploads/" + dbSaleData.image_name;
     const dbBuyerData = await User.findByPk(buyer_id);
-
+    console.log(dbSaleData);
     const sale = dbSaleData.get({ plain: true });
     const buyer = dbBuyerData.get({ plain: true });
 
@@ -240,10 +254,10 @@ router.get("/sale/:id", async (req, res) => {
 
     const dbSellerData = await User.findOne({ where: { id: sale.original_painter}});
     const seller = dbSellerData.get({ plain: true });
-    console.log(sale);
-    console.log(buyer);
-    console.log(paintingProc);
-    console.log(seller);
+    // console.log(sale);
+    // console.log(buyer);
+    // console.log(paintingProc);
+    // console.log(seller);
     res.render('sale', { sale, buyer, paintingProc, seller, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
