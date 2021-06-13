@@ -2,16 +2,15 @@ const router = require("express").Router();
 const multer = require("multer");
 const fs = require("fs");
 const { Painting, Category, Tag } = require("../../models");
-const { route } = require("./userRoutes");
+const dTim = new Date().toISOString();
+const dTimName = dTim.toString().replace(/:/g, ".");
 
 //#region Multer specific variables
 const ulStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, __basedir + "/uploads/");
     },
-    filename: (req, file, cb) => {
-        const dTim = new Date().toISOString();
-        const dTimName = dTim.toString().replace(/:/g, ".");
+    filename: (req, file, cb) => {        
         cb(null, dTimName + "_" + file.originalname);
     }
 });
@@ -120,18 +119,19 @@ router.get("/:id", async (req, res) => {
 // POST single painting
 router.post("/", upload.single("image_data"), async (req, res) => {
 
-    try {
+   try {
 
-        // Runs insert type based on the POST request body
+        const painter = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.original_painter;
+        const owner = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.current_owner;
         const painting = await Painting.create({
             title: req.body.title,
             image_name: req.file.filename,
             image_data: fs.readFileSync(__basedir + "/uploads/" + req.file.filename),
             details: req.body.details,
             selling: true,
-            created_date: req.body.created_date,
-            original_painter: req.session.userId,
-            current_owner: req.session.userId
+            created_date: dTim,
+            original_painter: painter,
+            current_owner: owner
         });
         
         // Updates variable to instead show the original filename rather than the BLOB output
