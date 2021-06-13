@@ -119,7 +119,7 @@ router.get("/:id", async (req, res) => {
 // POST single painting
 router.post("/", upload.single("image_data"), async (req, res) => {
 
-   try {
+    try {
 
         const painter = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.original_painter;
         const owner = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.current_owner;
@@ -144,6 +144,7 @@ router.post("/", upload.single("image_data"), async (req, res) => {
 
         // Updates variable to instead show the original filename rather than the BLOB output
         painting.get({ plain: true }).image_data = "BLOB data - Query by /:id to get the full data of image";
+        painting.get({ plain: true }).procurement = [procurement];
 
         // Returns code to 200 and displays new painting object
         res.status(200).json(painting);
