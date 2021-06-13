@@ -19,7 +19,7 @@ PaintingProc.init(
         },
         buyer_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         painting_id: {
             type: DataTypes.INTEGER,
