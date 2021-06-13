@@ -17,15 +17,47 @@ router.get("/gallery", async (req, res) => {
     // Local scope variables
     const paintings = await Painting.findAll({
       include: [
-        { model: Category, attributes: ["category_name"], through: { attributes: [] } },
-        { model: Tag, attributes: ["tag_name"], through: { attributes: [] }  },
-        { model: User, attributes: ["first_name", "last_name"], through: { attributes: [] }  }
+        {
+          model: PaintingProc,
+          include: [
+            {
+              model: User,
+              as: 'seller',
+              attributes:
+              {
+                exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
+              }
+            },
+            {
+              model: User,
+              as: 'buyer',
+              attributes:
+              {
+                exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
+              }
+            },
+          ],
+          where: {
+            buyer_id: null,
+            end_date: null
+          }
+        },
+        {
+          model: Category,
+          attributes: ["category_name"],
+          through: { attributes: [] }
+        },
+        {
+          model: Tag,
+          attributes: ["tag_name"],
+          through: { attributes: [] }
+        }
       ],
       order: [
         ["created_at", "DESC"]
       ],
     });
-
+    
     // Downloads data from MySQL painting.image_data and creates file into the uploads folder
     for (const painting of paintings) {
       fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
@@ -50,9 +82,41 @@ router.get("/gallery/oldest", async (req, res) => {
     // Local scope variables
     const paintings = await Painting.findAll({
       include: [
-        { model: Category, attributes: ["category_name"], through: { attributes: [] } },
-        { model: Tag, attributes: ["tag_name"], through: { attributes: [] } },
-        { model: User, attributes: ["first_name", "last_name"], through: { attributes: [] } }
+        {
+          model: PaintingProc,
+          include: [
+            {
+              model: User,
+              as: 'seller',
+              attributes:
+              {
+                exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
+              }
+            },
+            {
+              model: User,
+              as: 'buyer',
+              attributes:
+              {
+                exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
+              }
+            },
+          ],
+          where: {
+            buyer_id: null,
+            end_date: null
+          }
+        },
+        {
+          model: Category,
+          attributes: ["category_name"],
+          through: { attributes: [] }
+        },
+        {
+          model: Tag,
+          attributes: ["tag_name"],
+          through: { attributes: [] }
+        }
       ],
       order: [
         ["created_at", "ASC"]
@@ -122,6 +186,7 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
             },
           ],
           where: {
+            buyer_id: null,
             end_date: null
           }
         },
@@ -185,6 +250,7 @@ router.get("/gallery/pricehightolow", async (req, res) => {
             },
           ],
           where: {
+            buyer_id: null,
             end_date: null
           }
         },
