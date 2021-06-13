@@ -28,8 +28,10 @@ router.get("/gallery", async (req, res) => {
       painting.image_data = "/uploads/" + painting.image_name;
     }
 
+    const allPaintings = paintings.map((painting) => painting.get({plain: true}));
+
     // Goes to Gallery handlebar, and pass paintings
-    res.render("gallery", { paintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
+    res.render("gallery", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
 
   } catch (err) {
     res.status(500).json(err);
