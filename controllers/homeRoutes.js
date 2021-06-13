@@ -5,7 +5,7 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    res.render("homepage", { loggedIn: req.session.loggedIn });
+    res.render("homepage", { loggedIn: req.session.loggedIn, homepageAct: true, galleryAct: false, teamAct: false });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -29,7 +29,7 @@ router.get("/gallery", async (req, res) => {
     }
 
     // Goes to Gallery handlebar, and pass paintings
-    res.render("gallery", { paintings, loggedIn: req.session.loggedIn });
+    res.render("gallery", { paintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
 
   } catch (err) {
     res.status(500).json(err);
@@ -150,7 +150,7 @@ router.get("/sale/:id", async (req, res) => {
 
 router.get("/meet", async (req, res) => {
   try {
-    res.render('meet', { loggedIn: req.session.loggedIn });
+    res.render('meet', { loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: false, teamAct: true });
   } catch (err) {
     res.status(500).json(err);
   }
