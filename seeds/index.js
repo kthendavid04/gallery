@@ -1,8 +1,11 @@
-const sequelize = require('../config/connection');
+const sequelize = require("../config/connection");
+const fs = require("fs");
 const userData = require("./userData.json");
 const paintingData = require("./paintingData.json");
 const categoryData = require("./categoryData.json");
 const tagData = require("./tagData.json");
+const dTim = new Date().toISOString();
+const dTimName = dTim.toString().replace(/:/g, ".");
 
 const { User, Painting, PaintingProc, Category, PaintingCat, Tag, PaintingTag } = require("../models");
 
@@ -21,8 +24,8 @@ const seedAll = async () => {
 
     await Painting.create({
       title: painting.title,
-      image_name: painting.image_name,
-      image_data: painting.image_data,
+      image_name: dTimName + "_" + painting.image_name,
+      image_data: fs.readFileSync(__dirname + "/" + painting.image_data),
       details: painting.details,
       selling: painting.selling,
       created_date: painting.created_date,
@@ -36,21 +39,15 @@ const seedAll = async () => {
 
   // Creates all the painting procurements
   for (const painting of paintings) {
-
-    try {
-      console.log(await PaintingProc.create({
+    
+    await PaintingProc.create({
         seller_id: users[Math.floor(Math.random() * users.length)].id,
         buyer_id: users[Math.floor(Math.random() * users.length)].id,
         painting_id: paintings[Math.floor(Math.random() * paintings.length)].id,
         start_date: "2021-01-01",
         end_date: null,
         price: Math.floor(Math.random() * (1000000.00 - 1000.00 + 1000.00)) + 1000.00
-    }));
-      
-    } catch (error) {
-      console.log(error);
-    }
-    
+    });
   }
 
   // Create all categories
