@@ -99,7 +99,7 @@ router.get("/signup", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//profile page
 router.get("/profile", withAuth, async (req, res) => {
   try {
     res.render("profile", { loggedIn: req.session.loggedIn });
