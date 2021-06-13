@@ -120,9 +120,10 @@ router.get("/:id", async (req, res) => {
 // POST single painting
 router.post("/", upload.single("image_data"), async (req, res) => {
 
-    try {
+   try {
 
-        // Runs insert type based on the POST request body
+        const painter = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.original_painter;
+        const owner = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.current_owner;
         const painting = await Painting.create({
             title: req.body.title,
             image_name: req.file.filename,
@@ -130,8 +131,8 @@ router.post("/", upload.single("image_data"), async (req, res) => {
             details: req.body.details,
             selling: true,
             created_date: req.body.created_date,
-            original_painter: req.session.userId,
-            current_owner: req.session.userId
+            original_painter: painter,
+            current_owner: owner
         });
         
         // Updates variable to instead show the original filename rather than the BLOB output
