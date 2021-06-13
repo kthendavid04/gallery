@@ -1,8 +1,6 @@
 // Local variables to call on packages
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 const sequelize = require('../config/connection');
-const Painting = require('./Painting');
-const User = require('./User');
 
 class PaintingProc extends Model {}
 
@@ -36,9 +34,10 @@ PaintingProc.init(
         price: {
             type: DataTypes.DECIMAL,
             allowNull: false
-        }
+        },
     },
     {
+        
         sequelize,
         timestamps: true,
         freezeTableName: true,
