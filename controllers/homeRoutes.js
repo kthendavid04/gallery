@@ -17,9 +17,9 @@ router.get("/gallery", async (req, res) => {
     // Local scope variables
     const paintings = await Painting.findAll({
       include: [
-        { model: Category },
-        { model: Tag },
-        { model: User }
+        { model: Category, attributes: ["category_name"], through: { attributes: [] } },
+        { model: Tag, attributes: ["tag_name"], through: { attributes: [] }  },
+        { model: User, attributes: ["first_name", "last_name"], through: { attributes: [] }  }
       ],
       order: [
         ["created_at", "DESC"]
@@ -50,9 +50,9 @@ router.get("/gallery/oldest", async (req, res) => {
     // Local scope variables
     const paintings = await Painting.findAll({
       include: [
-        { model: Category },
-        { model: Tag },
-        { model: User }
+        { model: Category, attributes: ["category_name"], through: { attributes: [] } },
+        { model: Tag, attributes: ["tag_name"], through: { attributes: [] } },
+        { model: User, attributes: ["first_name", "last_name"], through: { attributes: [] } }
       ],
       order: [
         ["created_at", "ASC"]
@@ -67,6 +67,8 @@ router.get("/gallery/oldest", async (req, res) => {
 
     // Copies paintings into allPaintings with serialize data
     const allPaintings = paintings.map((painting) => painting.get({plain: true}));
+
+    console.log(allPaintings);
 
     // Goes to Gallery handlebar, and pass paintings
     res.render("galleryOldest", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
