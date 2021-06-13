@@ -20,7 +20,10 @@ router.get("/gallery", async (req, res) => {
         { model: Category },
         { model: Tag },
         { model: User }
-      ]
+      ],
+      order: [
+        ["created_at", "DESC"]
+      ],
     });
 
     // Downloads data from MySQL painting.image_data and creates file into the uploads folder
@@ -29,9 +32,8 @@ router.get("/gallery", async (req, res) => {
       painting.image_data = "/uploads/" + painting.image_name;
     }
 
+    // Copies paintings into allPaintings with serialize data
     const allPaintings = paintings.map((painting) => painting.get({plain: true}));
-
-    console.log(allPaintings);
 
     // Goes to Gallery handlebar, and pass paintings
     res.render("gallery", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
@@ -42,12 +44,38 @@ router.get("/gallery", async (req, res) => {
 });
 //sorting gallery postings from oldest to newest
 router.get("/gallery/oldest", async (req, res) => {
+  
   try {
-    res.render("galleryOldest", { loggedIn: req.session.loggedIn });
+
+    // Local scope variables
+    const paintings = await Painting.findAll({
+      include: [
+        { model: Category },
+        { model: Tag },
+        { model: User }
+      ],
+      order: [
+        ["created_at", "ASC"]
+      ],
+    });
+
+    // Downloads data from MySQL painting.image_data and creates file into the uploads folder
+    for (const painting of paintings) {
+      fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      painting.image_data = "/uploads/" + painting.image_name;
+    }
+
+    // Copies paintings into allPaintings with serialize data
+    const allPaintings = paintings.map((painting) => painting.get({plain: true}));
+
+    // Goes to Gallery handlebar, and pass paintings
+    res.render("galleryOldest", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
+
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 //sorting gallery postings by category
 router.get("/gallery/category", async (req, res) => {
   try {
@@ -66,8 +94,55 @@ router.get("/gallery/tag", async (req, res) => {
 });
 //sorting gallery postings on price lowest to highest
 router.get("/gallery/pricelowtohigh", async (req, res) => {
-  try {
-    res.render("galleryLow", { loggedIn: req.session.loggedIn });
+  
+  // try {
+    
+    const procurements = await PaintingProc.findAll({
+      include: [
+        { 
+          model: User,
+          as: 'seller',
+          attributes:
+          {
+            exclude: ["password"]
+          },
+          // where: {
+          //   id: User.id
+          // }
+        },
+        { 
+          model: User,
+          as: 'buyer',
+          attributes:
+          {
+            exclude: ["password"]
+          },
+          // where: {
+          //   id: User.id
+          // }
+        },
+        { model: Painting }
+      ],
+      order: [
+        ["price", "ASC"]
+      ]
+    });
+
+    
+    
+    // Downloads data from MySQL painting.image_data and creates file into the uploads folder
+    for (const procurement of procurements) {
+      fs.writeFileSync(__basedir + "/uploads/" + procurement.Painting.image_name, procurement.Painting.image_data);
+      procurement.Painting.image_data = "/uploads/" + procurement.Painting.image_name;
+    }
+ 
+      // Copies paintings into allPaintings with serialize data
+      const allProcs = procurements.map((procurement) => procurement.get({plain: true}));
+      console.log(allProcs);
+      try {
+      // Goes to Gallery handlebar, and pass paintings
+      res.render("galleryLow", { paintings: allProcs, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
+    
   } catch (err) {
     res.status(500).json(err);
   }
