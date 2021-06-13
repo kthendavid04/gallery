@@ -14,7 +14,8 @@
         </div>
         <div class="content">
             <p class="title is-4">Details:</p><p>{{details}}</p>
-             <br>
+            <h3>Price: {{format_price painting_procurements.[0].price}}</h3>
+            <br>
             <h2>Categories</h2>
             {{#each Categories as |Category| }}
                 {{#each Category as |Single|}}

@@ -45,7 +45,7 @@ const seedAll = async () => {
     
     await PaintingProc.create({
         seller_id: users[Math.floor(Math.random() * users.length)].id,
-        buyer_id: users[Math.floor(Math.random() * users.length)].id,
+        buyer_id: null,
         painting_id: paintingNewid,
         start_date: "2021-01-01",
         end_date: null,
