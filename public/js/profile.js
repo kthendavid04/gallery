@@ -10,10 +10,10 @@ const newPieceFormHandler = async (event) => {
   let fd = new FormData();
   fd.append('title', title);
   fd.append('details', details);
-  //fd.append('image_name', image.name);
+  fd.append('price', price);
   fd.append('image_data', image, `${image.name}`);
   
-  if (title && details && image) {
+  if (title && details && image && price) {
     const response = await fetch(`/api/paintings`, {
       method: 'POST',
       body: fd,
@@ -24,7 +24,7 @@ const newPieceFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/profile/listed');
     } else {
       alert(response.statusText);
     }
