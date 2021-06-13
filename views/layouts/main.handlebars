@@ -69,13 +69,25 @@
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
         <ul>
-          <li class="has-background-info-dark">
+          {{#if homepageAct}}
+            <li class="has-background-info-dark">
+          {{else}}
+            <li class='has-background-white has-text-black'>
+          {{/if}}
             <a href='/'>Overview</a>
           </li>
-          <li class='has-background-white has-text-black'>
+          {{#if galleryAct}}
+            <li class="has-background-info-dark">
+          {{else}}
+            <li class='has-background-white has-text-black'>
+          {{/if}}
             <a href='/gallery'>Browse the Galleries</a>
           </li>
-          <li class='has-background-white has-text-black'>
+          {{#if teamAct}}
+            <li class="has-background-info-dark">
+          {{else}}
+            <li class='has-background-white has-text-black'>
+          {{/if}}
             <a href='/meet'>Meet the Team</a>
           </li>
         </ul>
