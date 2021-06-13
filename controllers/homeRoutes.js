@@ -100,7 +100,7 @@ router.get("/signup", async (req, res) => {
   }
 });
 
-router.get("/profile", async (req, res) => {
+router.get("/profile", withAuth, async (req, res) => {
   try {
     res.render("profile", { loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -108,7 +108,7 @@ router.get("/profile", async (req, res) => {
   }
 });
 
-router.get("/profile/newart", async (req, res) => {
+router.get("/profile/newart", withAuth, async (req, res) => {
   try {
     res.render("profileNewArt", { loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -116,7 +116,7 @@ router.get("/profile/newart", async (req, res) => {
   }
 });
 
-router.get("/profile/listed", async (req, res) => {
+router.get("/profile/listed", withAuth, async (req, res) => {
   try {
     res.render("profileListed", { loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -124,7 +124,7 @@ router.get("/profile/listed", async (req, res) => {
   }
 });
 
-router.get("/profile/purchased", async (req, res) => {
+router.get("/profile/purchased", withAuth, async (req, res) => {
   try {
     res.render("profilePurchased", { loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -132,7 +132,7 @@ router.get("/profile/purchased", async (req, res) => {
   }
 });
 
-router.get("/profile/sold", async (req, res) => {
+router.get("/profile/sold", withAuth, async (req, res) => {
   try {
     res.render("profileSold", { loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -180,52 +180,52 @@ router.get("/meet", async (req, res) => {
 
 // comments
 
-router.get("/", async (req, res) => {
-  try {
-    // Get all projects and JOIN with user data
-    const commentsData = await Comments.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-      ],
-    });
+// router.get("/", async (req, res) => {
+//   try {
+//     // Get all projects and JOIN with user data
+//     const commentsData = await Comments.findAll({
+//       include: [
+//         {
+//           model: User,
+//           attributes: ["name"],
+//         },
+//       ],
+//     });
 
-    // Serialize data so the template can read it
-    const comments = commentsData.map((post) => comments.get({ plain: true }));
+//     // Serialize data so the template can read it
+//     const comments = commentsData.map((post) => comments.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
-    res.render("homepage", { 
-      comments, 
-      logged_in: req.session.logged_in 
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     // Pass serialized data and session flag into template
+//     res.render("homepage", { 
+//       comments, 
+//       logged_in: req.session.logged_in 
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
-router.get("/comments/:id", async (req, res) => {
-  try {
-    const commentsData = await Comments.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-      ],
-    });
+// router.get("/comments/:id", async (req, res) => {
+//   try {
+//     const commentsData = await Comments.findByPk(req.params.id, {
+//       include: [
+//         {
+//           model: User,
+//           attributes: ["name"],
+//         },
+//       ],
+//     });
 
-    const comments = commentsData.get({ plain: true });
+//     const comments = commentsData.get({ plain: true });
 
-    res.render("comments", {
-      ...comments,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.render("comments", {
+//       ...comments,
+//       logged_in: req.session.logged_in
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 
 
@@ -274,8 +274,10 @@ router.get("/comments/:id", async (req, res) => {
 
 
 router.get("/login", (req, res) => {
+  
+  console.log(req.session);
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
+  if (req.session.loggedIn) {
     res.redirect("/profile");
     return;
   }
