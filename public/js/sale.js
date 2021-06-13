@@ -7,10 +7,12 @@ const saleHandler = async (event) => {
     const paintingProcIdEl = document.getElementById('paintingProcId');
     const paintingProcId = paintingProcIdEl.getAttribute('data-desc');
 
+    const end_date = new Date().toISOString();
+
     if (buyer_id) {
         const response = await fetch(`/api/paintingprocs/${paintingProcId}`, {
             method: 'PUT',
-            body: JSON.stringify({ buyer_id }),
+            body: JSON.stringify({ buyer_id, end_date }),
             headers: { 'Content-Type': 'application/json' },
         });
 

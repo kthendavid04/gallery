@@ -107,7 +107,11 @@ router.get("/signup", async (req, res) => {
 
 router.get("/profile", withAuth, async (req, res) => {
   try {
-    res.render("profile", { loggedIn: req.session.loggedIn });
+    const dbUserData = await User.findOne({ where: {id: req.session.userId}})
+    const user = dbUserData.get({ plain: true });
+
+    console.log(user);
+    res.render("profile", { user, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
