@@ -23,7 +23,7 @@ const newPieceFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/profile/listed');
     } else {
       alert(response.statusText);
     }
