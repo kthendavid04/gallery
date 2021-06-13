@@ -1,4 +1,4 @@
-cd // Local variables to call on packages
+// Local variables to call on packages
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
