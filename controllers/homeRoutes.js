@@ -35,7 +35,7 @@ router.get("/gallery", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//sorting gallery postings from oldest to newest
 router.get("/gallery/oldest", async (req, res) => {
   try {
     res.render("galleryOldest", { loggedIn: req.session.loggedIn });
@@ -43,7 +43,7 @@ router.get("/gallery/oldest", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//sorting gallery postings by category
 router.get("/gallery/category", async (req, res) => {
   try {
     res.render("galleryCategory", { loggedIn: req.session.loggedIn });
@@ -51,7 +51,7 @@ router.get("/gallery/category", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//sorting callery postings by tag
 router.get("/gallery/tag", async (req, res) => {
   try {
     res.render("galleryTag", { loggedIn: req.session.loggedIn });
@@ -59,7 +59,7 @@ router.get("/gallery/tag", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//sorting gallery postings on price lowest to highest
 router.get("/gallery/pricelowtohigh", async (req, res) => {
   try {
     res.render("galleryLow", { loggedIn: req.session.loggedIn });
@@ -67,7 +67,7 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//sorting gallery postings on price highest to lowest
 router.get("/gallery/pricehightolow", async (req, res) => {
   try {
     res.render("galleryHigh", { loggedIn: req.session.loggedIn });
@@ -75,7 +75,7 @@ router.get("/gallery/pricehightolow", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//sorting gallery postings by artist name
 router.get("/gallery/artistname", async (req, res) => {
   try {
     res.render("galleryArtist", { loggedIn: req.session.loggedIn });
@@ -83,7 +83,7 @@ router.get("/gallery/artistname", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//sorting gallery postings by artwok name
 router.get("/gallery/artworkname", async (req, res) => {
   try {
     res.render("galleryArtwork", { loggedIn: req.session.loggedIn });
@@ -91,7 +91,7 @@ router.get("/gallery/artworkname", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//directing user to the signup page if not logged in
 router.get("/signup", async (req, res) => {
   try {
     res.render("signup", { loggedIn: req.session.loggedIn });
