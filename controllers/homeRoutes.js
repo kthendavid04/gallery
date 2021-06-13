@@ -18,7 +18,8 @@ router.get("/gallery", async (req, res) => {
     const paintings = await Painting.findAll({
       include: [
         { model: Category },
-        { model: Tag }
+        { model: Tag },
+        { model: User }
       ]
     });
 
@@ -29,6 +30,8 @@ router.get("/gallery", async (req, res) => {
     }
 
     const allPaintings = paintings.map((painting) => painting.get({plain: true}));
+
+    console.log(allPaintings);
 
     // Goes to Gallery handlebar, and pass paintings
     res.render("gallery", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });

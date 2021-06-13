@@ -9,12 +9,14 @@
         <div class="media">
             <div class="media-content">
                 <p class="title is-4">Title: {{title}}</p>
-                <p class="subtitle is-6">Artist Name: {{original_painter}}</p>
+                <p class="subtitle is-6">Artist Name: {{Users.[0].first_name}} {{Users.[0].last_name}}</p>
             </div>
         </div>
         <div class="content">
             {{details}} <a href="#">@artist</a>.
-            <a href="#">Categories</a> <a href="#">Tags</a>
+            <a href="#">Categories</a>
+            {{#each Categories as || }}
+            <a href="#">Tags</a>
             <br>
             <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
