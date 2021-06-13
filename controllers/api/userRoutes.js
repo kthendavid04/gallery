@@ -61,20 +61,20 @@ router.post("/", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   
+  console.log(req.body);
+
   try {
 
     // Variables queries database
     const userLogin = await User.findOne({
-      attributes: {
-        exclude: ["password"]
-      },
       where: {
         email: req.body.email
       }
     });
+    const pwdValidation = await userLogin.checkPassword(req.body.password);
 
     // Checks userLogin returns valid information
-    if (!userLogin) {
+    if (!pwdValidation) {
       res
       .status(400)
       .json({ message: "Incorrect username or password, please try again" });

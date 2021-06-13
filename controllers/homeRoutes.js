@@ -108,7 +108,7 @@ router.get("/profile", withAuth, async (req, res) => {
   }
 });
 
-router.get("/profile/newart", async (req, res) => {
+router.get("/profile/newart", withAuth, async (req, res) => {
   try {
     res.render("profileNewArt", { loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -116,7 +116,7 @@ router.get("/profile/newart", async (req, res) => {
   }
 });
 
-router.get("/profile/listed", async (req, res) => {
+router.get("/profile/listed", withAuth, async (req, res) => {
   try {
     res.render("profileListed", { loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -124,7 +124,7 @@ router.get("/profile/listed", async (req, res) => {
   }
 });
 
-router.get("/profile/purchased", async (req, res) => {
+router.get("/profile/purchased", withAuth, async (req, res) => {
   try {
     res.render("profilePurchased", { loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -132,7 +132,7 @@ router.get("/profile/purchased", async (req, res) => {
   }
 });
 
-router.get("/profile/sold", async (req, res) => {
+router.get("/profile/sold", withAuth, async (req, res) => {
   try {
     res.render("profileSold", { loggedIn: req.session.loggedIn });
   } catch (err) {
