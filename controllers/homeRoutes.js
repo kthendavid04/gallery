@@ -77,7 +77,7 @@ router.get("/gallery", async (req, res) => {
     const allPaintings = paintings.map((painting) => painting.get({plain: true}));
 
     // Goes to Gallery handlebar, and pass paintings
-    res.render("gallery", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
+    res.render("gallery", { paintings: allPaintings, loggedIn: req.session.loggedIn, isSelling: true, homepageAct: false, galleryAct: true, teamAct: false });
 
   } catch (err) {
     res.status(500).json(err);
@@ -382,8 +382,36 @@ router.get("/profile/purchased", withAuth, async (req, res) => {
 });
 
 router.get("/profile/sold", withAuth, async (req, res) => {
+
   try {
-    res.render("profileSold", { loggedIn: req.session.loggedIn });
+    
+    const paintingsSold = await Painting.findAll({
+      include: [
+        {
+          model: PaintingProc,
+          where: {
+            seller_id: req.session.userId,
+            buyer_id: { [Op.ne]: null }
+          }
+        }
+      ]
+    });
+    
+
+    // Downloads data from MySQL painting.image_data and creates file into the uploads folder
+    for (const painting of paintingsSold) {
+      fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      let painterName = await User.findByPk(painting.original_painter, { attributes: ["first_name", "last_name"] });
+      painting.original_painter = painterName.first_name + " " + painterName.last_name;
+      painting.image_data = "/uploads/" + painting.image_name;
+    }
+
+    const paintings = paintingsSold.map((temp2) => temp2.get({plain: true}));
+
+    console.log(paintings);
+
+    // res.status(200).json(temp);
+    res.render("profileSold", {paintings, isSelling: false, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
