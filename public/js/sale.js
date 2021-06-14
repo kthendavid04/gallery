@@ -9,6 +9,8 @@ const saleHandler = async (event) => {
 
     const end_date = new Date().toISOString();
 
+    console.log(buyerEl);
+
     if (buyer_id) {
         const response = await fetch(`/api/paintingprocs/${paintingProcId}`, {
             method: 'PUT',

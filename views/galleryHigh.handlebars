@@ -30,29 +30,19 @@
       <a href="/gallery/pricehightolow" class="dropdown-item is-active">
         Price High-to-Low
       </a>
-      <a href="/gallery/artistname" class="dropdown-item">
+      {{!-- <a href="/gallery/artistname" class="dropdown-item">
         Artist Name
       </a>
       <a href="/gallery/artworkname" class="dropdown-item">
         Artwork Name
-      </a>
+      </a> --}}
     </div>
   </div>
 </div>
 
-<div class="card">
-  <div class="card-image image-left">
-    <figure class="image is-4by3">
-      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-    </figure>
-  </div>
-  <div class="card-content">
-    <div class="media">
-      <div class="media-content">
-        <p class="title is-4">Artwork Name</p>
-        <p class="subtitle is-6">Artist Name</p>
-      </div>
-    </div>
+{{#each paintings as |painting|}}
+  {{> gallery}}
+{{/each}}
 
     <div class="content">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.

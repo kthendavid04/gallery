@@ -5,21 +5,21 @@
                 <div class="card">
   <div class="card-image image-left">
     <figure class="image is-4by3">
-      <img src="{{sale.image_data}}" alt="Placeholder image">
+      <img src="{{painting.image_data}}" alt="Placeholder image">
     </figure>
   </div>
   <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <p class="title is-4" data-desc='{{paintingProc.id}}' id='paintingProcId'>{{sale.title}}</p>
-        <p class="subtitle is-6">Original art by {{seller.first_name}} {{seller.last_name}}</p>
+        <p class="title is-4" data-desc="{{painting.painting_procurements.[0].id}}" id='paintingProcId'>{{painting.title}}</p>
+        <p class="subtitle is-6">Original art by {{artist.first_name}} {{artist.last_name}}</p>
       </div>
     </div>
 
     <div class="content">
-      {{sale.details}}
+      {{painting.details}}
       <br>
-      <time datetime="2016-1-1">{{sale.date_created}}</time>
+      <time datetime="2016-1-1">{{format_date painting.created_date}}</time>
     </div>
   </div>
 </div>
@@ -29,8 +29,11 @@
                     <div class='card-content'>
                         <h2 id="buyer" data-desc='{{buyer.id}}'>Buyer name: {{buyer.first_name}} {{buyer.last_name}}</h2>
                         <h3>Buyer address: {{buyer.address}}</h3>
-                        <h3>Purchase price: {{paintingProc.price}}</h3>
-                        <br>
+
+                        <h3>Purchase price: {{format_price painting.painting_procurements.[0].price}}</h3>
+                    </div>
+                    <div class='card-footer'>
+
                         <button class="button is-primary" type='submit' id="buy">Confirm Purchase</button>
                     </div>
                 </div>

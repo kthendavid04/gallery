@@ -8,13 +8,15 @@
     <div class="card-content">
         <div class="media">
             <div class="media-content">
-                <p class="title is-4">Title: {{title}}</p>
-                <p class="subtitle is-6">Artist Name: {{Users.[0].first_name}} {{Users.[0].last_name}}</p>
+                <p class="title is-4">Title:<br>{{title}}</p>
+                <p class="subtitle is-6">Artist Name: {{original_painter}}</p>
             </div>
         </div>
         <div class="content">
             <p class="title is-4">Details:</p><p>{{details}}</p>
-             <br>
+            <h3>Price: {{format_price painting_procurements.[0].price}}</h3>
+            <h3>Created On: {{format_date created_date}}</h3>
+            <br>
             <h2>Categories</h2>
             {{#each Categories as |Category| }}
                 {{#each Category as |Single|}}
