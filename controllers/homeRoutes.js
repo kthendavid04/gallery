@@ -388,7 +388,33 @@ router.get("/profile/listed", withAuth, async (req, res) => {
 
 router.get("/profile/purchased", withAuth, async (req, res) => {
   try {
-    res.render("profilePurchased", { loggedIn: req.session.loggedIn });
+
+    const purchased = await Painting.findAll({
+      include: [
+        {
+          model: PaintingProc,
+          where: {
+            buyer_id: req.session.userId
+          }
+        }
+      ],
+      where: {
+        current_owner: req.session.userId
+      }
+    });
+
+    for (const painting of purchased) {
+      fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      painting.image_data = "/uploads/" + painting.image_name;
+      let painterName = await User.findByPk(painting.original_painter, { attributes: ["first_name", "last_name"] });
+      painting.original_painter = painterName.first_name + " " + painterName.last_name;
+    }
+
+    const paintings = purchased.map((painting) => painting.get({plain: true}));
+
+    console.log(paintings);
+
+    res.render("profilePurchased", { paintings, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -419,11 +445,8 @@ router.get("/profile/sold", withAuth, async (req, res) => {
       painting.image_data = "/uploads/" + painting.image_name;
     }
 
-    const paintings = paintingsSold.map((temp2) => temp2.get({plain: true}));
+    const paintings = paintingsSold.map((painting) => painting.get({plain: true}));
 
-    console.log(paintings);
-
-    // res.status(200).json(temp);
     res.render("profileSold", {paintings, isSelling: false, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
