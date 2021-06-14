@@ -374,7 +374,7 @@ router.get("/sale/:id", async (req, res) => {
 
     const userId = req.session.userId;
     const paintingId = req.params.id;
-    const buyerInfo = await User.findByPk(userId, { attributes: ["first_name", "last_name", "address"] });
+    const buyerInfo = await User.findByPk(userId, { attributes: ["id", "first_name", "last_name", "address"] });
     const paintingData = await Painting.findByPk(paintingId, {
       include: [
         {
@@ -400,6 +400,8 @@ router.get("/sale/:id", async (req, res) => {
     const buyer = buyerInfo.get({plain: true})
     const painting = paintingData.get({plain: true});
     const artist = artistData.get({plain: true});
+
+    console.log(buyer);
 
     res.render('sale', { buyer, painting, artist, loggedIn: req.session.loggedIn });
     
