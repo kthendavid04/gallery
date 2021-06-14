@@ -2,6 +2,7 @@ const router = require("express").Router();
 const fs = require("fs");
 const { User, Painting, PaintingProc, Category, PaintingCat, Tag, PaintingTag } = require("../models");
 const withAuth = require("../utils/auth");
+const redirect = require("../utils/redirect");
 
 router.get("/", async (req, res) => {
   try {
@@ -285,7 +286,7 @@ router.get("/gallery/pricehightolow", async (req, res) => {
   }
 });
 //sorting gallery postings by artist name
-router.get("/gallery/artistname", async (req, res) => {
+router.get("/gallery/artistname", redirect, async (req, res) => {
   try {
     res.render("galleryArtist", { paintings: allPaintings, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -293,7 +294,7 @@ router.get("/gallery/artistname", async (req, res) => {
   }
 });
 //sorting gallery postings by artwok name
-router.get("/gallery/artworkname", async (req, res) => {
+router.get("/gallery/artworkname", redirect, async (req, res) => {
   try {
     res.render("galleryArtwork", { loggedIn: req.session.loggedIn });
   } catch (err) {
