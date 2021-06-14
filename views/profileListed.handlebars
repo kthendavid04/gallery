@@ -26,7 +26,10 @@
               Listed Pieces
             </div>
           </div>
-          <div class='card-content'>
+          {{#each paintings as |painting|}}
+            {{> listed}}
+          {{/each}}
+          {{!-- <div class='card-content'>
             <ul>
               <li>Image:</li>
               <li>Title:</li>
@@ -52,7 +55,7 @@
               <li>Artist:</li>
               <li>Price:</li>
             </ul>
-          </div>
+          </div> --}}
         </div>
 
       </div>

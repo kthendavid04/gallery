@@ -357,7 +357,19 @@ router.get("/profile/newart", withAuth, async (req, res) => {
 
 router.get("/profile/listed", withAuth, async (req, res) => {
   try {
-    res.render("profileListed", { loggedIn: req.session.loggedIn });
+    const paintings = await Painting.findAll({ 
+      where: { current_owner: req.session.userId, selling: true }, raw: true }, {include: [{ model: PaintingProc}]});
+
+    for (const painting of paintings) {
+      fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      painting.image_data = "/uploads/" + painting.image_name;
+    }
+  
+    //const dbPaintingProcData = await PaintingProc.findAll({ where: { seller_id: req.session.userId}, raw: true})
+    //const dbUserData = await User.
+    //const allPaintings = paintings.map((painting) => painting.get({plain: true}));
+    console.log(paintings);
+    res.render("profileListed", { paintings, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
