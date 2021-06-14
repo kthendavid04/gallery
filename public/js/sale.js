@@ -6,6 +6,7 @@ const saleHandler = async (event) => {
 
     const paintingProcIdEl = document.getElementById('paintingProcId');
     const paintingProcId = paintingProcIdEl.getAttribute('data-desc');
+    const paintingId = paintingProcIdEl.getAttribute("data-painting");
 
     const end_date = new Date().toISOString();
 
@@ -18,9 +19,17 @@ const saleHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         });
 
-        if (response.ok) {
-            alert('Congrats on the purchase of your new art piece!');
-            document.location.replace('/profile/purchased');
+        if (response.ok) { 
+            const updSelling = await fetch(`/api/paintings/${paintingId}`, {
+                method: 'PUT',
+                body: JSON.stringify({ selling: false, current_owner: buyer_id }),
+                headers: { 'Content-Type': 'application/json' },
+            });            
+
+            if(updSelling.ok) {
+                alert('Congrats on the purchase of your new art piece!');
+                document.location.replace('/profile/purchased');
+            }
         } else {
             alert('Failed to complete purchase');
         }
