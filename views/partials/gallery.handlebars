@@ -41,6 +41,9 @@
         </div>
         {{#if isSelling }}
         <a href='/sale/{{id}}'><button class="button is-primary" type='submit'>Purchase</button></a>
+        {{else}}
+        <p class="title is-4">Purchased:</p>
+        <p class="subtitle is-6">{{format_date painting_procurements.[0].updatedAt}}</p>
         {{/if}}
     </div>
 </div>
