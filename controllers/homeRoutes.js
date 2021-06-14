@@ -412,8 +412,6 @@ router.get("/sale/:id", async (req, res) => {
     const painting = paintingData.get({plain: true});
     const artist = artistData.get({plain: true});
 
-    console.log(buyer);
-
     res.render('sale', { buyer, painting, artist, loggedIn: req.session.loggedIn });
     
   } catch (err) {
