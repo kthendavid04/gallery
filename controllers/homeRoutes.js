@@ -18,6 +18,7 @@ router.get("/gallery", async (req, res) => {
   try {
 
     // Local scope variables
+    const currentUser = req.session.hasOwnProperty("userId") ? req.session.userId : 0;
     const paintings = await Painting.findAll({
       include: [
         {
@@ -42,7 +43,7 @@ router.get("/gallery", async (req, res) => {
           ],
           where: {
             seller_id: {
-              [Op.ne]: req.session.userId
+              [Op.ne]: currentUser
             },
             buyer_id: null,
             end_date: null
@@ -70,13 +71,10 @@ router.get("/gallery", async (req, res) => {
       let painterName = await User.findByPk(painting.original_painter, { attributes: ["first_name", "last_name"] });
       painting.original_painter = painterName.first_name + " " + painterName.last_name;
       painting.image_data = "/uploads/" + painting.image_name;
-      console.log(painting.painter);
     }
     
     // Copies paintings into allPaintings with serialize data
     const allPaintings = paintings.map((painting) => painting.get({plain: true}));
-
-    console.log(allPaintings);
 
     // Goes to Gallery handlebar, and pass paintings
     res.render("gallery", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
@@ -91,6 +89,7 @@ router.get("/gallery/oldest", async (req, res) => {
   try {
 
     // Local scope variables
+    const currentUser = req.session.hasOwnProperty("userId") ? req.session.userId : 0;
     const paintings = await Painting.findAll({
       include: [
         {
@@ -115,7 +114,7 @@ router.get("/gallery/oldest", async (req, res) => {
           ],
           where: {
             seller_id: {
-              [Op.ne]: req.session.userId
+              [Op.ne]: currentUser
             },
             buyer_id: null,
             end_date: null
@@ -148,8 +147,6 @@ router.get("/gallery/oldest", async (req, res) => {
     // Copies paintings into allPaintings with serialize data
     const allPaintings = paintings.map((painting) => painting.get({plain: true}));
 
-    console.log(allPaintings);
-
     // Goes to Gallery handlebar, and pass paintings
     res.render("galleryOldest", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
 
@@ -179,6 +176,7 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
   
   try {
     
+    const currentUser = req.session.hasOwnProperty("userId") ? req.session.userId : 0;
     const paintings = await Painting.findAll({
       include: [
         {
@@ -203,7 +201,7 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
           ],
           where: {
             seller_id: {
-              [Op.ne]: req.session.userId
+              [Op.ne]: currentUser
             },
             buyer_id: null,
             end_date: null
@@ -248,6 +246,7 @@ router.get("/gallery/pricehightolow", async (req, res) => {
   
   try {
 
+    const currentUser = req.session.hasOwnProperty("userId") ? req.session.userId : 0;
     const paintings = await Painting.findAll({
       include: [
         {
@@ -272,7 +271,7 @@ router.get("/gallery/pricehightolow", async (req, res) => {
           ],
           where: {
             seller_id: {
-              [Op.ne]: req.session.userId
+              [Op.ne]: currentUser
             },
             buyer_id: null,
             end_date: null
@@ -340,7 +339,6 @@ router.get("/profile", withAuth, async (req, res) => {
     const dbUserData = await User.findOne({ where: {id: req.session.userId}})
     const user = dbUserData.get({ plain: true });
 
-    console.log(user);
     res.render("profile", { user, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
@@ -368,7 +366,7 @@ router.get("/profile/listed", withAuth, async (req, res) => {
     //const dbPaintingProcData = await PaintingProc.findAll({ where: { seller_id: req.session.userId}, raw: true})
     //const dbUserData = await User.
     //const allPaintings = paintings.map((painting) => painting.get({plain: true}));
-    console.log(paintings);
+    // console.log(paintings);
     res.render("profileListed", { paintings, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
@@ -558,7 +556,6 @@ router.get("/meet", async (req, res) => {
 
 router.get("/login", (req, res) => {
   
-  console.log(req.session);
   // If the user is already logged in, redirect the request to another route
   if (req.session.loggedIn) {
     res.redirect("/profile");
