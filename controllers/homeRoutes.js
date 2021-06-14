@@ -67,11 +67,16 @@ router.get("/gallery", async (req, res) => {
     // Downloads data from MySQL painting.image_data and creates file into the uploads folder
     for (const painting of paintings) {
       fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      let painterName = await User.findByPk(painting.original_painter, { attributes: ["first_name", "last_name"] });
+      painting.original_painter = painterName.first_name + " " + painterName.last_name;
       painting.image_data = "/uploads/" + painting.image_name;
+      console.log(painting.painter);
     }
-
+    
     // Copies paintings into allPaintings with serialize data
     const allPaintings = paintings.map((painting) => painting.get({plain: true}));
+
+    console.log(allPaintings);
 
     // Goes to Gallery handlebar, and pass paintings
     res.render("gallery", { paintings: allPaintings, loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: true, teamAct: false });
@@ -135,6 +140,8 @@ router.get("/gallery/oldest", async (req, res) => {
     // Downloads data from MySQL painting.image_data and creates file into the uploads folder
     for (const painting of paintings) {
       fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      let painterName = await User.findByPk(painting.original_painter, { attributes: ["first_name", "last_name"] });
+      painting.original_painter = painterName.first_name + " " + painterName.last_name;
       painting.image_data = "/uploads/" + painting.image_name;
     }
 
@@ -221,6 +228,8 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
     // Downloads data from MySQL painting.image_data and creates file into the uploads folder
     for (const painting of paintings) {
       fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      let painterName = await User.findByPk(painting.original_painter, { attributes: ["first_name", "last_name"] });
+      painting.original_painter = painterName.first_name + " " + painterName.last_name;
       painting.image_data = "/uploads/" + painting.image_name;
     }
  
@@ -288,6 +297,8 @@ router.get("/gallery/pricehightolow", async (req, res) => {
     // Downloads data from MySQL painting.image_data and creates file into the uploads folder
     for (const painting of paintings) {
       fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      let painterName = await User.findByPk(painting.original_painter, { attributes: ["first_name", "last_name"] });
+      painting.original_painter = painterName.first_name + " " + painterName.last_name;
       painting.image_data = "/uploads/" + painting.image_name;
     }
 
