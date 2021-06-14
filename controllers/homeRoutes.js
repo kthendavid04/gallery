@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Op } = require("sequelize");
 const fs = require("fs");
 const { User, Painting, PaintingProc, Category, PaintingCat, Tag, PaintingTag } = require("../models");
 const withAuth = require("../utils/auth");
@@ -13,6 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/gallery", async (req, res) => {
+  
   try {
 
     // Local scope variables
@@ -39,6 +41,9 @@ router.get("/gallery", async (req, res) => {
             },
           ],
           where: {
+            seller_id: {
+              [Op.ne]: req.session.userId
+            },
             buyer_id: null,
             end_date: null
           }
@@ -104,6 +109,9 @@ router.get("/gallery/oldest", async (req, res) => {
             },
           ],
           where: {
+            seller_id: {
+              [Op.ne]: req.session.userId
+            },
             buyer_id: null,
             end_date: null
           }
@@ -187,6 +195,9 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
             },
           ],
           where: {
+            seller_id: {
+              [Op.ne]: req.session.userId
+            },
             buyer_id: null,
             end_date: null
           }
@@ -251,6 +262,9 @@ router.get("/gallery/pricehightolow", async (req, res) => {
             },
           ],
           where: {
+            seller_id: {
+              [Op.ne]: req.session.userId
+            },
             buyer_id: null,
             end_date: null
           }
@@ -355,24 +369,40 @@ router.get("/profile/sold", withAuth, async (req, res) => {
 });
 
 router.get("/sale/:id", async (req, res) => {
+  
   try {
-    const buyer_id = req.session.userId;
-    const dbSaleData = await Painting.findByPk(req.params.id);
-    const dbBuyerData = await User.findByPk(buyer_id);
 
-    const sale = dbSaleData.get({ plain: true });
-    const buyer = dbBuyerData.get({ plain: true });
+    const userId = req.session.userId;
+    const paintingId = req.params.id;
+    const buyerInfo = await User.findByPk(userId, { attributes: ["first_name", "last_name", "address"] });
+    const paintingData = await Painting.findByPk(paintingId, {
+      include: [
+        {
+          model: PaintingProc,
+          include: [
+            {
+              model: User,
+              as: 'seller',
+              attributes:
+              {
+                exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
+              }
+            },
+          ]
+        },
+      ]
+    });
+    const artistData = await User.findByPk(paintingData.original_painter, {attributes: ["first_name", "last_name"]});
 
-    const dbPaintingProcData = await PaintingProc.findOne({ where: { painting_id: sale.id}});
-    const paintingProc = dbPaintingProcData.get({ plain: true });
+    fs.writeFileSync(__basedir + "/uploads/" + paintingData.image_name, paintingData.image_data);
+    paintingData.image_data = "/uploads/" + paintingData.image_name;
 
-    const dbSellerData = await User.findOne({ where: { id: sale.original_painter}});
-    const seller = dbSellerData.get({ plain: true });
-    console.log(sale);
-    console.log(buyer);
-    console.log(paintingProc);
-    console.log(seller);
-    res.render('sale', { sale, buyer, paintingProc, seller, loggedIn: req.session.loggedIn });
+    const buyer = buyerInfo.get({plain: true})
+    const painting = paintingData.get({plain: true});
+    const artist = artistData.get({plain: true});
+
+    res.render('sale', { buyer, painting, artist, loggedIn: req.session.loggedIn });
+    
   } catch (err) {
     res.status(500).json(err);
   }

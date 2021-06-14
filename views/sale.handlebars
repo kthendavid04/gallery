@@ -5,14 +5,14 @@
                 <div class="card">
   <div class="card-image image-left">
     <figure class="image is-4by3">
-      <img src="{{sale.image_data}}" alt="Placeholder image">
+      <img src="{{painting.image_data}}" alt="Placeholder image">
     </figure>
   </div>
   <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <p class="title is-4" data-desc='{{paintingProc.id}}' id='paintingProcId'>{{sale.title}}</p>
-        <p class="subtitle is-6">Original art by {{seller.first_name}} {{seller.last_name}}</p>
+        <p class="title is-4" data-desc='{{painting.painting_procurements.[0].id}}' id='paintingProcId'>{{painting.title}}</p>
+        <p class="subtitle is-6">Original art by {{artist.first_name}} {{artist.last_name}}</p>
       </div>
     </div>
 
