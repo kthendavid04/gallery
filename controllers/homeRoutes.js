@@ -35,7 +35,7 @@ router.get("/gallery", async (req, res) => {
           include: [
             {
               model: User,
-              as: 'seller',
+              as: "seller",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -43,7 +43,7 @@ router.get("/gallery", async (req, res) => {
             },
             {
               model: User,
-              as: 'buyer',
+              as: "buyer",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -112,7 +112,7 @@ router.get("/gallery/oldest", async (req, res) => {
           include: [
             {
               model: User,
-              as: 'seller',
+              as: "seller",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -120,7 +120,7 @@ router.get("/gallery/oldest", async (req, res) => {
             },
             {
               model: User,
-              as: 'buyer',
+              as: "buyer",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -209,7 +209,7 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
           include: [
             {
               model: User,
-              as: 'seller',
+              as: "seller",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -217,7 +217,7 @@ router.get("/gallery/pricelowtohigh", async (req, res) => {
             },
             {
               model: User,
-              as: 'buyer',
+              as: "buyer",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -286,7 +286,7 @@ router.get("/gallery/pricehightolow", async (req, res) => {
           include: [
             {
               model: User,
-              as: 'seller',
+              as: "seller",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -294,7 +294,7 @@ router.get("/gallery/pricehightolow", async (req, res) => {
             },
             {
               model: User,
-              as: 'buyer',
+              as: "buyer",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -568,7 +568,7 @@ router.get("/sale/:id", withAuth, async (req, res) => {
           include: [
             {
               model: User,
-              as: 'seller',
+              as: "seller",
               attributes:
               {
                 exclude: ["email", "password", "address", "bank_info","createdAt", "updatedAt"]
@@ -592,7 +592,7 @@ router.get("/sale/:id", withAuth, async (req, res) => {
     const artist = artistData.get({plain: true});
 
     // Renders handlebar
-    res.render('sale', { buyer, painting, artist, loggedIn: req.session.loggedIn });
+    res.render("sale", { buyer, painting, artist, loggedIn: req.session.loggedIn });
     
   } catch (error) {
 
@@ -608,7 +608,7 @@ router.get("/meet", async (req, res) => {
   try {
 
     // Renders handlebar
-    res.render('meet', { loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: false, teamAct: true });
+    res.render("meet", { loggedIn: req.session.loggedIn, homepageAct: false, galleryAct: false, teamAct: true });
 
   } catch (error) {
 
