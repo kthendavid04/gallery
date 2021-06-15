@@ -1,5 +1,4 @@
-
-    <section class="section">
+<section class="section">
       <section class="hero box is-small is-primary is-bold">
         <div class="hero-body">
           <div class="container">
@@ -13,33 +12,27 @@
     <div class='columns'>
       <aside class='column is-one-fifth menu'>
         <ul class="menu-list">
-          <li><a class='is-active' href='/profile'>View/Edit Profile</a></li>
+          <li><a href='/profile'>View/Edit Profile</a></li>
           <li><a href='/profile/newart'>Post New Art Piece</a></li>
           <li><a href='/profile/listed'>View Listed Pieces</a></li>
-          <li><a href='/profile/unlisted'>View Unlisted Pieces</a></li>
+          <li><a class='is-active' href='/profile/unlisted'>View Unlisted Pieces</a></li>
           <li><a href='/profile/sold'>View Sold Pieces</a></li>
           <li><a href='/profile/purchased'>View Purchased Pieces</a></li>
         </ul>
       </aside>
-      <div class='column is-two-fifths'>
+      <div class='column is-two-fifths list-btn'>
         <div class='card'>
           <div class='card-header'>
             <div class='card-header-title'>
-             My Profile Info
+              Unisted Pieces
             </div>
           </div>
-          <div class='card-content'>
-           <ul>
-             <li>First Name: {{user.first_name}}</li>
-             <li>Last Name: {{user.last_name}}</li>
-             <li>Email: {{user.email}}</li>
-             <li>Address: {{user.address}}</li>
-             <button class="button is-small is-primary">
-               Update Info
-             </button>
-           </ul>
-          </div>
+          {{#each paintings as |painting|}}
+            {{> unlisted}}
+          {{/each}}
         </div>
 
       </div>
     </div>
+
+<script type="text/javascript" src='/js/unlisted.js'></script>
