@@ -1,5 +1,7 @@
 const router = require("express").Router();
-const { PaintingProc, User } = require("../../models");
+const sequelize = require("../../config/connection");
+const { PaintingProc, User, Painting } = require("../../models");
+
 
 // GET route for all procurements table
 router.get("/", async (req, res) => {
@@ -7,7 +9,16 @@ router.get("/", async (req, res) => {
     try {
         
         // Query for all paintings procurements and save results to variable
-        const procurements = await PaintingProc.findAll();
+        const procurements = await PaintingProc.findAll({
+            include: [
+                {
+                    model: Painting,
+                    attributes: {
+                        exclude: ["image_data"]
+                    }
+                }
+            ]
+        });
 
         // Returns with status code 200
         // and displays all paintings list
@@ -45,6 +56,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+// POST route for adding a single procurement entry
 router.post("/", async (req, res) => {
 
     try {
@@ -63,6 +75,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+// PUT route for updating a single procument entry
 router.put("/:id", async (req, res) => {
 
     try {

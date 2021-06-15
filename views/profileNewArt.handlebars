@@ -1,71 +1,71 @@
 <section class="section">
-      <section class="hero box is-small is-primary is-bold">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">
-              Profile
-            </h1>
-          </div>
+  <section class="hero box is-small is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Profile
+        </h1>
+      </div>
+    </div>
+  </section>
+</section>
+<div class='columns'>
+  <aside class='column is-one-fifth menu'>
+    <ul class="menu-list">
+      <li><a href='/profile'>View/Edit Profile</a></li>
+      <li><a class='is-active' href='/profile/newart'>Post New Art Piece</a></li>
+      <li><a href='/profile/listed'>View Listed Pieces</a></li>
+      <li><a href='/profile/sold'>View Sold Pieces</a></li>
+      <li><a href='/profile/purchased'>View Purchased Pieces</a></li>
+    </ul>
+  </aside>
+  <div class='column is-two-fifths'>
+    <div class='card'>
+      <div class='card-header'>
+        <div class='card-header-title'>
+          Submit New Art Piece
         </div>
-      </section>
-    </section>
-    <div class='columns'>
-      <aside class='column is-one-fifth menu'>
-        <ul class="menu-list">
-          <li><a href='/profile'>View/Edit Profile</a></li>
-          <li><a class='is-active' href='/profile/newart'>Post New Art Piece</a></li>
-          <li><a href='/profile/listed'>View Listed Pieces</a></li>
-          <li><a href='/profile/sold'>View Sold Pieces</a></li>
-          <li><a href='/profile/purchased'>View Purchased Pieces</a></li>
-        </ul>
-      </aside>
-      <div class='column is-two-fifths'>
-        <div class='card'>
-          <div class='card-header'>
-            <div class='card-header-title'>
-             Submit New Art Piece
+      </div>
+      <div class='card-content'>
+        <form class="box card ml-3 new-piece-form" style="width: 60%;">
+          <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g. Mona Lisa" id="title">
             </div>
           </div>
-          <div class='card-content'>
-           <form class="box card ml-3" style="width: 60%;">
-    <div class="field">
-      <label class="label">Title</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="e.g. John">
-      </div>
-    </div>
-    <div class="field">
-      <label class="label">Description</label>
-      <div class="control">
-        <input class="input" type="email" placeholder="e.g. alex@example.com">
-      </div>
-    </div>
-    <div class="field">
-    <label class="label">Asking Price ($):</label>
-  <p class="control">
-    <input class="input" type="text" placeholder="Amount of money">
-  </p>
-</div>
-    <div class="field file is-small has-name">
-    <label class="file-label">
-    <input class="file-input" type="file" name="resume">
-    <span class="file-cta">
-      <span class="file-icon">
-        <i class="fas fa-upload"></i>
-      </span>
-      <span class="file-label">
-        Choose a file…
-      </span>
-    </span>
-    <span class="file-name">
-      Screen Shot 2017-07-29 at 15.54.25.png
-    </span>
-  </label>
-</div>
-    <button class="button is-primary">Create Piece</button>
-  </form>
+          <div class="field">
+            <label class="label">Details</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g. This is true art!" id="details">
+            </div>
           </div>
-        </div>
-
+          <div class="field">
+            <label class="label">Asking Price ($):</label>
+            <p class="control">
+              <input class="input" type="number" placeholder="Amount of money" id='price'>
+            </p>
+          </div>
+          <div class="field file is-small has-name">
+            <label class="file-label">
+              <input class="file" type="file" name="image" accept="image/*" id='image'>
+              {{!-- <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+              <span class="file-name">
+                Image Title
+              </span> --}}
+            </label>
+          </div>
+          <button class="button is-primary">Create Piece</button>
+        </form>
       </div>
-    </div>
+  </div>
+
+</div>
+<script src='/js/profile.js'></script>

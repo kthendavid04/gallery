@@ -1,17 +1,16 @@
 const router = require("express").Router();
 const multer = require("multer");
 const fs = require("fs");
-const { Painting, Category, Tag } = require("../../models");
-const { route } = require("./userRoutes");
+const { Painting, PaintingProc, Category, Tag } = require("../../models");
+const dTim = new Date().toISOString();
+const dTimName = dTim.toString().replace(/:/g, ".");
 
 //#region Multer specific variables
 const ulStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, __basedir + "/uploads/");
     },
-    filename: (req, file, cb) => {
-        const dTim = new Date().toISOString();
-        const dTimName = dTim.toString().replace(/:/g, ".");
+    filename: (req, file, cb) => {        
         cb(null, dTimName + "_" + file.originalname);
     }
 });
@@ -122,20 +121,31 @@ router.post("/", upload.single("image_data"), async (req, res) => {
 
     try {
 
-        // Runs insert type based on the POST request body
+        // Local scope variables
+        const painter = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.original_painter;
+        const owner = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.current_owner;
         const painting = await Painting.create({
             title: req.body.title,
             image_name: req.file.filename,
             image_data: fs.readFileSync(__basedir + "/uploads/" + req.file.filename),
             details: req.body.details,
-            selling: req.body.selling,
-            created_date: req.body.created_date,
-            original_painter: req.body.original_painter,
-            current_owner: req.body.current_owner
+            selling: true,
+            created_date: dTim,
+            original_painter: painter,
+            current_owner: owner
         });
-        
+        const procurement = await PaintingProc.create({
+            seller_id: owner,
+            buyer_id: null,
+            painting_id: painting.id,
+            start_date: dTim,
+            end_date: null,
+            price: parseFloat(req.body.price)
+        });
+
         // Updates variable to instead show the original filename rather than the BLOB output
         painting.get({ plain: true }).image_data = "BLOB data - Query by /:id to get the full data of image";
+        painting.get({ plain: true }).procurement = [procurement];
 
         // Returns code to 200 and displays new painting object
         res.status(200).json(painting);
@@ -151,6 +161,7 @@ router.post("/", upload.single("image_data"), async (req, res) => {
     }
 });
 
+// PUT route for updating a single 
 router.put("/:id", upload.single("image_data"), async (req, res) => {
     
     try {

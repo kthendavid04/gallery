@@ -59,10 +59,10 @@ router.post("/", async (req, res) => {
   }
 });
 
+// POST route for the login, when user enters
+// their email, password and then clicks on login
 router.post("/login", async (req, res) => {
   
-  console.log(req.body);
-
   try {
 
     // Variables queries database
@@ -88,6 +88,7 @@ router.post("/login", async (req, res) => {
       
       // Returns code to 200 and displays new user object
       res.status(200).json({ user: userLogin, message: "You are now logged in!" });
+
     });
     
   } catch (error) {
@@ -133,6 +134,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// POST route for when the user clicks on the logout
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
       req.session.destroy(() => {

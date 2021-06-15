@@ -54,7 +54,7 @@ router.put("/:id", async (req, res) => {
         
         // Checks if the userTypeData data returned successfully
         if (!userTypeData[0]) {
-            res.status(404).json({ message: 'No user type with this id!' });
+            res.status(404).json({ message: "No user type with this id!" });
             return;
         }
 

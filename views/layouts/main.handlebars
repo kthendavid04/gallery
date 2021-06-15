@@ -6,6 +6,7 @@
     <title>Galleria</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href='/css/style.css'>
+    <link rel="shortcut icon" href="/images/canvas.ico" type="image/x-icon">
   </head>
   <body>
   <section class="hero hero-img is-info is-halfheight">
@@ -69,13 +70,25 @@
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
         <ul>
-          <li class="has-background-info-dark">
+          {{#if homepageAct}}
+            <li class="has-background-info-dark">
+          {{else}}
+            <li class='has-background-white has-text-black'>
+          {{/if}}
             <a href='/'>Overview</a>
           </li>
-          <li class='has-background-white has-text-black'>
+          {{#if galleryAct}}
+            <li class="has-background-info-dark">
+          {{else}}
+            <li class='has-background-white has-text-black'>
+          {{/if}}
             <a href='/gallery'>Browse the Galleries</a>
           </li>
-          <li class='has-background-white has-text-black'>
+          {{#if teamAct}}
+            <li class="has-background-info-dark">
+          {{else}}
+            <li class='has-background-white has-text-black'>
+          {{/if}}
             <a href='/meet'>Meet the Team</a>
           </li>
         </ul>
@@ -86,26 +99,21 @@
  {{{body}}}
   </body>
   {{#if loggedIn}}
-    <script src='./js/logout.js'></script>
+    <script src='/js/logout.js'></script>
   {{/if}}
 <script>
   document.addEventListener('DOMContentLoaded', () => {
 
-  // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-  // Check if there are any navbar burgers
   if ($navbarBurgers.length > 0) {
 
-    // Add a click event on each of them
     $navbarBurgers.forEach( el => {
       el.addEventListener('click', () => {
 
-        // Get the target from the "data-target" attribute
         const target = el.dataset.target;
         const $target = document.getElementById(target);
 
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
         el.classList.toggle('is-active');
         $target.classList.toggle('is-active');
 

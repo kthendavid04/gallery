@@ -1,5 +1,5 @@
+// Calls to packages/routes
 const router = require("express").Router();
-
 const userRoutes = require("./userRoutes");
 const paintingRoutes = require("./paintingRoutes");
 const paintingProcRoutes = require("./paintingProcRoutes");

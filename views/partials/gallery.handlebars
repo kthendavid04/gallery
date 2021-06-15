@@ -1,0 +1,50 @@
+<section>
+    <div class="card">
+    <div class="card-image image-left">
+        <figure class="image is-4by3">
+            <img src="{{image_data}}" alt="Placeholder image">
+        </figure>
+    </div>
+    <div class="card-content">
+        <div class="media">
+            <div class="media-content">
+                <p class="title is-4">Title:</p>
+                <p class="subtitle is-6">{{title}}</p>
+                <br>
+                <p class="title is-4">Artist:</p>
+                <p class="subtitle is-6">{{original_painter}}</p>
+            </div>
+        </div>
+        <div class="content">
+            <p class="title is-4">Details:</p>
+            <p class="subtitle is-6">{{details}}</p><br>
+            <p class="title is-4">Price:</p>
+            <p class="subtitle is-6">{{format_price painting_procurements.[0].price}}</p>
+            <br>
+            <p class="title is-4">Created:</p>
+            <p class="subtitle is-6">{{format_date created_date}}</p>
+            <br>
+            {{!-- <h2>Categories</h2>
+            {{#each Categories as |Category| }}
+                {{#each Category as |Single|}}
+                    <li>{{Single}}</li>
+                {{/each}}
+            {{/each}}
+            <h2>Tags</h2>
+            {{#each Tags as |Tag| }}
+                {{#each Tag as |Single|}}
+                    <li>{{Single}}</li>
+                {{/each}}
+            {{/each}}
+            <br> --}}
+            {{!-- <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> --}}
+        </div>
+        {{#if isSelling }}
+        <a href='/sale/{{id}}'><button class="button is-primary" type='submit'>Purchase</button></a>
+        {{else}}
+        <p class="title is-4">Purchased:</p>
+        <p class="subtitle is-6">{{format_date painting_procurements.[0].updatedAt}}</p>
+        {{/if}}
+    </div>
+</div>
+</section>
