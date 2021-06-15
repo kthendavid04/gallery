@@ -23,9 +23,11 @@
         </div>
       </div>
     </div>
-    {{#each paintings as |painting|}}
-      {{> gallery isSelling=../isSelling }}
-    {{/each}}
+     <div class='column is-two-fifths'>
+        <div class='card'>
+        {{#each paintings as |painting|}}
+          {{> gallery isSelling=../isSelling }}
+         {{/each}}
     {{!--
       <div class="content">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
