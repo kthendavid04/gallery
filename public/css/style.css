@@ -80,14 +80,14 @@ color: white;
   left: 15px;
   bottom: 70px;
   font-weight: bold;
-  background-color:grey;
+  /* background-color:grey; */
  
 }
 
 .subtitle {
   font-size: 40px;
   color: whitesmoke;
-  background-color:grey;
+  /* background-color:grey; */
   display:center;
   position: relative;
   left: 15px;
@@ -115,7 +115,7 @@ left: 750px;
   right: 750px;
 }
 
-.card-content {
+/* .card-content {
   font-size: 25px;
   color: black;
 
@@ -123,11 +123,12 @@ left: 750px;
 
 .card {
   color: black;
-}
+  background-color: gray 
+}*/
 
-.section {
-  background-color: gray
-}
+/* .section {
+  
+} */
 /* .has-background-white {
 background: rgba(236, 228, 228, 0.813);
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
