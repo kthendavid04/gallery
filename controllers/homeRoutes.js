@@ -466,6 +466,52 @@ router.get("/profile/listed", withAuth, async (req, res) => {
   }
 });
 
+// GET route to take logged in users to view their current arts NOT for sale
+router.get("/profile/unlisted", withAuth, async (req, res) => {
+  
+  try {
+
+    // Local scope variables
+    const unlistedPaintings = await Painting.findAll({
+      include: [
+        {
+          model: PaintingProc,
+          where: {
+            buyer_id: null,
+            end_date: null
+          }
+        }
+      ],
+      where: {
+        current_owner: req.session.userId,
+        selling: false
+      }
+    });
+
+    // Downloads data from MySQL painting.image_data and creates file into the uploads folder
+    // Updates the original_painter property rather than ID, to first and last name
+    // Updates the image_data from BLOB binary to an actual static path
+    for (const painting of unlistedPaintings) {
+      fs.writeFileSync(__basedir + "/uploads/" + painting.image_name, painting.image_data);
+      let painterName = await User.findByPk(painting.original_painter, { attributes: ["first_name", "last_name"] });
+      painting.original_painter = painterName.first_name + " " + painterName.last_name;
+      painting.image_data = "/uploads/" + painting.image_name;
+    }
+
+    // Copies listedPaintings into paintings with serialize data
+    const paintings = unlistedPaintings.map((painting) => painting.get({plain: true}));
+
+    // Renders handlebar
+    res.render("profileUnlisted", { paintings: paintings, loggedIn: req.session.loggedIn });
+
+  } catch (error) {
+
+    // Returns with status code 500
+    // and displays error
+    res.status(500).json(error);
+  }
+});
+
 // GET route to take logged in users to view all their purchases
 router.get("/profile/purchased", withAuth, async (req, res) => {
   

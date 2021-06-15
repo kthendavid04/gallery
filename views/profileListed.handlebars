@@ -15,11 +15,12 @@
           <li><a href='/profile'>View/Edit Profile</a></li>
           <li><a href='/profile/newart'>Post New Art Piece</a></li>
           <li><a class='is-active' href='/profile/listed'>View Listed Pieces</a></li>
+          <li><a href='/profile/unlisted'>View Unlisted Pieces</a></li>
           <li><a href='/profile/sold'>View Sold Pieces</a></li>
           <li><a href='/profile/purchased'>View Purchased Pieces</a></li>
         </ul>
       </aside>
-      <div class='column is-two-fifths'>
+      <div class='column is-two-fifths unlist-btn'>
         <div class='card'>
           <div class='card-header'>
             <div class='card-header-title'>
@@ -29,34 +30,9 @@
           {{#each paintings as |painting|}}
             {{> listed}}
           {{/each}}
-          {{!-- <div class='card-content'>
-            <ul>
-              <li>Image:</li>
-              <li>Title:</li>
-              <li>Description:</li>
-              <li>Artist:</li>
-              <li>Price:</li>
-            </ul>
-          </div>
-          <div class='card-content'>
-            <ul>
-              <li>Image:</li>
-              <li>Title:</li>
-              <li>Description:</li>
-              <li>Artist:</li>
-              <li>Price:</li>
-            </ul>
-          </div>
-          <div class='card-content'>
-            <ul>
-              <li>Image:</li>
-              <li>Title:</li>
-              <li>Description:</li>
-              <li>Artist:</li>
-              <li>Price:</li>
-            </ul>
-          </div> --}}
         </div>
 
       </div>
     </div>
+
+<script src='/js/listed.js'></script>
