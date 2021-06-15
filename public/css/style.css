@@ -115,7 +115,12 @@ left: 750px;
 
 .card-content {
   font-size: 25px;
+  color: black;
 
+}
+
+.card {
+  color: black;
 }
 
 .section {
