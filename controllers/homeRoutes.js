@@ -383,12 +383,8 @@ router.get("/signup", async (req, res) => {
     res.status(500).json(error);
   }
 });
-<<<<<<< HEAD
-//profile page
-=======
 
 // GET route to take logged in user to their personal profile
->>>>>>> 758ac189ce2eea717bfeae02f6abdf16b7c52211
 router.get("/profile", withAuth, async (req, res) => {
   
   try {

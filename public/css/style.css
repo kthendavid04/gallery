@@ -1,8 +1,8 @@
 .fade-in-text {
   display: inline-block;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 150px;
-  color: black;
+  font-family: 'Poiret One', cursive;
+  font-size: 250px;
+  color: rgba(48, 156, 68, 0.711);
   animation: fadeIn linear 1s;
   -webkit-animation: fadeIn linear 1s;
   -moz-animation: fadeIn linear 1s;
@@ -17,12 +17,12 @@
 .hero-img {
     width: 100%;
     height: 70vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://cdn.hovia.com/app/uploads/starry-night-art-plain-820x532.jpg);
+    background-image: url("https://source.unsplash.com/1905x660/?painting");
     background-position: center;
-    background-size: cover;
+    
     background-repeat: no-repeat;
-    min-width: 100%;
-    min-height: 100%;
+    /* min-width: 100%;
+    min-height: 100%; */
     display: flex;
     position: relative;
     justify-content: center;
@@ -53,6 +53,101 @@
   0% {opacity:0;}
   100% {opacity:1;}
 }
+
+.glass {
+width: 50%;
+height: 50%;
+background: rgba(236, 228, 228, 0.813);
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 7.0px );
+-webkit-backdrop-filter: blur( 7.0px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+color: white;
+}
+
+.container {
+  width: 100%;
+  font-family: 'Poiret One', cursive;
+  color: white;
+}
+
+.title {
+  font-size: 95px;
+  color: white;
+  display:center;
+  position: relative;
+  left: 15px;
+  bottom: 70px;
+  font-weight: bold;
+ 
+}
+
+.subtitle {
+  font-size: 40px;
+  color: whitesmoke;
+  display:center;
+  position: relative;
+  left: 15px;
+  bottom: 50px;
+  font-weight: bold;
+}
+
+.navbar{
+/* background: rgba(236, 228, 228, 0.813);
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 7.0px );
+-webkit-backdrop-filter: blur( 7.0px );
+border-radius: 3px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+color: white; */
+/* border: 1px solid rgba( 255, 255, 255, 0.18 ); */
+position: relative;
+/* top:  */
+left: 750px;
+  
+}
+
+.hero-foot {
+  position: relative;
+  right: 750px;
+}
+
+.card-content {
+  font-size: 25px;
+
+}
+
+.section {
+  background-color: gray
+}
+/* .has-background-white {
+background: rgba(236, 228, 228, 0.813);
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 7.0px );
+-webkit-backdrop-filter: blur( 7.0px ); 
+}*/
+
+/* .has-text-black */
+
+/* .title {
+  color: $title-color
+  @if $title-family
+    font-family: $title-family
+  font-size: $title-size
+  font-weight: $title-weight
+  line-height: $title-line-height
+  strong
+    color: $title-strong-color
+    font-weight: $title-strong-weight
+  &:not(.is-spaced) + .subtitle
+    margin-top: $subtitle-negative-margin
+  // Sizes
+  @each $size in $sizes
+    $i: index($sizes, $size)
+    &.is-#{$i}
+      font-size: $size
+} */
 
 /* :root {
   --primary: #3d5852;
