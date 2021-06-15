@@ -121,6 +121,7 @@ router.post("/", upload.single("image_data"), async (req, res) => {
 
     try {
 
+        // Local scope variables
         const painter = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.original_painter;
         const owner = (req.session.hasOwnProperty("userId")) ? req.session.userId : req.body.current_owner;
         const painting = await Painting.create({
@@ -160,6 +161,7 @@ router.post("/", upload.single("image_data"), async (req, res) => {
     }
 });
 
+// PUT route for updating a single 
 router.put("/:id", upload.single("image_data"), async (req, res) => {
     
     try {
