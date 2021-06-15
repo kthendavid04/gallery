@@ -87,6 +87,7 @@ color: white;
 .subtitle {
   font-size: 40px;
   color: whitesmoke;
+  background-color:grey;
   display:center;
   position: relative;
   left: 15px;
