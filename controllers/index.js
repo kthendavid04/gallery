@@ -1,10 +1,11 @@
-const router = require('express').Router();
+// Calls to packages/routes
+const router = require("express").Router();
+const apiRoutes = require("./api");
+const homeRoutes = require("./homeRoutes");
 
-const apiRoutes = require('./api');
-const homeRoutes = require('./homeRoutes');
-
-router.use('/', homeRoutes);
-router.use('/api', apiRoutes);
+// Setup routes to use
+router.use("/", homeRoutes);
+router.use("/api", apiRoutes);
 
 // Redirects the user if it does not
 // match an existing route back to homepage

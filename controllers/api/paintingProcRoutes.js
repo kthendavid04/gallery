@@ -56,6 +56,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+// POST route for adding a single procurement entry
 router.post("/", async (req, res) => {
 
     try {
@@ -74,6 +75,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+// PUT route for updating a single procument entry
 router.put("/:id", async (req, res) => {
 
     try {
