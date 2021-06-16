@@ -22,6 +22,7 @@
 This app is to help Artist promote and sell their art to art ethusiast locally and or around the world.
 
 ## Installation
+[Heroku](https://whispering-river-42546.herokuapp.com/)
 
 ## Usage
 Users should register and login to be able to get all the benefits from this app. Users can login and sell art or place a bid on a art piece. User is able to take a picture and upload into his dashboard.
