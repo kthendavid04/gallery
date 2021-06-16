@@ -115,16 +115,15 @@ left: 750px;
   right: 750px;
 }
 
-/* .card-content {
+.card-content {
   font-size: 25px;
   color: black;
 
 }
 
-.card {
-  color: black;
-  background-color: gray 
-}*/
+.section {
+  background-color:gray
+}
 
 /* .section {
   
