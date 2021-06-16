@@ -4,7 +4,7 @@
         "image_name": "01-blossoming-apricot.jpg",
         "image_data": "images/01-blossoming-apricot.jpg",
         "details": "Blossoming Apricot",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     },
     {
@@ -12,7 +12,7 @@
         "image_name": "02-cosmos-flowers.jpg",
         "image_data": "images/02-cosmos-flowers.jpg",
         "details": "Cosmos Flowers",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     },
     {
@@ -20,7 +20,7 @@
         "image_name": "03-sand-sea-summer.jpg",
         "image_data": "images/03-sand-sea-summer.jpg",
         "details": "Sand Sea Summer",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     },
     {
@@ -28,7 +28,7 @@
         "image_name": "04-beach-chairs.jpg",
         "image_data": "images/04-beach-chairs.jpg",
         "details": "Beach Chairs",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     },
     {
@@ -36,7 +36,7 @@
         "image_name": "05-beach-sunrise.jpg",
         "image_data": "images/05-beach-sunrise.jpg",
         "details": "Beach Sunrise",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     },
     {
@@ -44,7 +44,7 @@
         "image_name": "06-fall-colors.jpg",
         "image_data": "images/06-fall-colors.jpg",
         "details": "Fall Colors",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     },
     {
@@ -52,7 +52,7 @@
         "image_name": "07-autumn-mountains.jpg",
         "image_data": "images/07-autumn-mountains.jpg",
         "details": "Autumn Mountains",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     },
     {
@@ -60,7 +60,7 @@
         "image_name": "08-frozen-river.jpg",
         "image_data": "images/08-frozen-river.jpg",
         "details": "Frozen River",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     },
     {
@@ -68,7 +68,7 @@
         "image_name": "09-winter-home.jpg",
         "image_data": "images/09-winter-home.jpg",
         "details": "Winter Home",
-        "selling": false,
+        "selling": true,
         "created_date": "2021-06-12"
     }
 ]
