@@ -40,9 +40,9 @@
             {{!-- <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> --}}
         </div>
         {{#if isSelling }}
-        <a href='/sale/{{id}}'><button class="button is-primary" type='submit'>Purchase</button></a>
+        <a href='/sale/{{id}}'><button class="button is-primary" type='submit'style="color: black;" >Purchase</button></a>
         {{else}}
-        <p class="title is-4">Purchased:</p>
+        <p class="title is-4" style="color: black;">Purchased:</p>
         <p class="subtitle is-6">{{format_date painting_procurements.[0].updatedAt}}</p>
         {{/if}}
     </div>
