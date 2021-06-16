@@ -2,27 +2,27 @@
     <div class="card">
     <div class="card-image image-left">
         <figure class="image is-4by3">
-            <img src="{{image_data}}" alt="Placeholder image">
+            <img src="{{image_data}}" style="height: 92%;" alt="Placeholder image">
         </figure>
     </div>
     <div class="card-content">
         <div class="media">
             <div class="media-content">
-                <p class="title is-4">Title:</p>
-                <p class="subtitle is-6">{{title}}</p>
+                <p class="title is-4" style="background-color:darkcyan;">Title:</p>
+                <p class="subtitle is-6" style="color: black;">{{title}}</p>
                 <br>
-                <p class="title is-4">Artist:</p>
-                <p class="subtitle is-6">{{original_painter}}</p>
+                <p class="title is-4" style="color: black;">Artist:</p>
+                <p class="subtitle is-6" style="color: black;">{{original_painter}}</p>
             </div>
         </div>
         <div class="content">
-            <p class="title is-4">Details:</p>
-            <p class="subtitle is-6">{{details}}</p><br>
-            <p class="title is-4">Price:</p>
-            <p class="subtitle is-6">{{format_price painting_procurements.[0].price}}</p>
+            <p class="title is-4" style="color: black;">Details:</p>
+            <p class="subtitle is-6" style="color: black;">{{details}}</p><br>
+            <p class="title is-4" style="color: black;">Price:</p>
+            <p class="subtitle is-6" style="color: black;">{{format_price painting_procurements.[0].price}}</p>
             <br>
-            <p class="title is-4">Created:</p>
-            <p class="subtitle is-6">{{format_date created_date}}</p>
+            <p class="title is-4" style="color: black;">Created:</p>
+            <p class="subtitle is-6" style="color: black;">{{format_date created_date}}</p>
             <br>
             {{!-- <h2>Categories</h2>
             {{#each Categories as |Category| }}
