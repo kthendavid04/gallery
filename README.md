@@ -17,7 +17,7 @@
 ## Description
 This app is to help promote the procurement and sales of high end paintings. 
 
-![Walkthroug](public/images/Galleria.gif)
+![Walkthroug](public/images/GalleriaSpeed.gif)
 
 ## Installation
 [Heroku](https://whispering-river-42546.herokuapp.com/) or https://whispering-river-42546.herokuapp.com/Create a profile on the web portal. Once this is done you will be able to log into the portal and buy or sell paintings. 
@@ -35,8 +35,8 @@ Copyright © 2021 [M.C.L.S.K](https://github.com/kthendavid04/gallery).<br />
 ## Contributing
 * [Max](https://github.com/the64man1)
 * [Cris](https://github.com/CrisC3)
-* [Syed](https://github.com/rizvi5a)
 * [Luis](https://github.com/CuevasLuis)
+* [Syed](https://github.com/rizvi5a)
 * [Katherine](https://github.com/kthendavid04)
 
 
