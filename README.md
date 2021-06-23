@@ -33,18 +33,33 @@ Users should register and login to be able to get all the benefits from this app
 Copyright © 2021 [M.C.L.S.K](https://github.com/kthendavid04/gallery).<br />
 
 ## Contributing
-* [Max](https://github.com/the64man1)
-* [Cris](https://github.com/CrisC3)
-* [Luis](https://github.com/CuevasLuis)
-* [Syed](https://github.com/rizvi5a)
-* [Katherine](https://github.com/kthendavid04)
-
-
-
-
-
-
-
-
-
-
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-hyan">Letter</th>
+    <th class="tg-hyan">Name</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">A</td>
+    <td class="tg-0lax">Max Quintanilla</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">B</td>
+    <td class="tg-0lax">Katherine Seeburger</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">Luis Cuevas</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">D</td>
+    <td class="tg-0lax">Syed Rizvi</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">E</td>
+    <td class="tg-0lax">Cristobal Canales</td>
+  </tr>
+</tbody>
+</table>
